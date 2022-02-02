@@ -4,7 +4,7 @@
 import java.util.ArrayList;
 
 public class BancoDeDados {
-	private ArrayList usuarios;
+	private ArrayList<Usuario> usuarios;
 	private ArrayList cursos;
 	
 }
