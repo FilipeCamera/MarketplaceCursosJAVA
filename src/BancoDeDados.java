@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class BancoDeDados {
 	static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-	static ArrayList<Object> cursos = new ArrayList<Object>();
+	static ArrayList<Curso> cursos = new ArrayList<Curso>();
 	
 	
 	public static void armazenarUsuario(Usuario usuario) {
@@ -13,7 +13,15 @@ public class BancoDeDados {
 	}
 	
 	public static ArrayList<Usuario> lerArmazenamentoUsuarios() {
-		return BancoDeDados.usuarios;
+		return usuarios;
+	}
+	
+	public static void armazenarCurso(Curso curso)  {
+		cursos.add(curso);
+	}
+	
+	public static ArrayList<Curso> lerArmazenamentoCursos() {
+		return cursos;
 	}
 	
 }
