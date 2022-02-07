@@ -83,8 +83,54 @@ public class Principal {
 
 			case 3:
 				autenticacao.desconectar();
-
-				break;
+				
+					System.out.println("Informe nome do curso:");
+					String nomeCurso = entrada.next();
+					System.out.println("Informe tipo do curso(1-Gravado,2-Ao Vivo 3-Individual):");
+					int tipoCurso = entrada.nextInt();
+					System.out.println("Informe valor do curso:");
+					Double preco = entrada.nextDouble();
+					
+					if(tipoCurso!=1){
+						System.out.println("Informe dia que inicia o curso:");
+						int diaIni = entrada.nextInt();
+						System.out.println("Informe mes que inicia o curso:");
+						int mesIni = entrada.nextInt();
+						System.out.println("Informe ano que inicia o curso:");
+						int anoIni = entrada.nextInt();
+						System.out.println("Informe hora que inicia o curso:");
+						int horaIni = entrada.nextInt();
+						System.out.println("Informe minuto que inicia o curso:");
+						int minutoIni = entrada.nextInt();
+						System.out.println("Informe dia que encerra o curso:");
+						int diaEnc = entrada.nextInt();
+						System.out.println("Informe mes que encerra o curso:");
+						int mesEnc = entrada.nextInt();
+						System.out.println("Informe ano que encerra o curso:");
+						int anoEnc = entrada.nextInt();
+						System.out.println("Informe hora que encerra o curso:");
+						int horaEnc = entrada.nextInt();
+						System.out.println("Informe minuto que encerra o curso:");
+						int minutoEnc = entrada.nextInt();
+						
+						if(tipoCurso==2) {
+							System.out.println("Informe numero de vagas:");
+							int vagas = entrada.nextInt();
+							Curso curso = new Curso(nomeCurso,"codigo",preco,vagas,false,
+									true,false,diaIni, mesIni, anoIni, horaIni, minutoIni, diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc);
+							BancoDeDados.armazenarCurso(curso);}
+						
+						if(tipoCurso==3) {
+							Curso curso= new Curso(nomeCurso,"codigo",preco,false,false,true,diaIni, mesIni, anoIni, horaIni, minutoIni, diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc);
+						BancoDeDados.armazenarCurso(curso);
+					}
+					}
+					else{	
+						Curso curso= new Curso(nomeCurso,"codigo",preco,true,false,false);
+						BancoDeDados.armazenarCurso(curso);
+							}
+						
+							break;
 			case 4:
 				ArrayList<Usuario> usuarios = BancoDeDados.lerArmazenamentoUsuarios();
 

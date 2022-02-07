@@ -16,6 +16,7 @@ public class BancoDeDados {
 		return usuarios;
 	}
 	
+
 	public static void armazenarCurso(Curso curso)  {
 		cursos.add(curso);
 	}
