@@ -13,7 +13,7 @@ public class BancoDeDados {
 	}
 	
 	public static ArrayList<Usuario> lerArmazenamentoUsuarios() {
-		return BancoDeDados.usuarios;
+		return usuarios;
 	}
 	
 	public static void armazenarCurso(Usuario cursos) {
@@ -21,7 +21,7 @@ public class BancoDeDados {
 	}
 	
 	public static ArrayList<Cursos> lerArmazenamentoCursos() {
-		return BancoDeDados.cursos;
+		return cursos;
 	}
 	
 }
