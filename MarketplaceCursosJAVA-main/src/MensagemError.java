@@ -1,17 +1,17 @@
 // Classe de validação
 
-public class Validacao extends Exception {
+public class MensagemError extends Exception {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6168670211255087397L;
 
-	public Validacao(String message) {
+	public MensagemError(String message) {
 		super(message);
 	}
 	
-	public Validacao(String message, Throwable cause) {
+	public MensagemError(String message, Throwable cause) {
 		super(message, cause);
 	}
 }
