@@ -1,6 +1,6 @@
 
 public class Curso {
-	
+
 	private String nomeCurso;
 	private String codigo;
 	private double preco;
@@ -8,29 +8,31 @@ public class Curso {
 	private boolean cursoGravado;
 	private boolean cursoAoVivo;
 	private boolean cursoIndividual;
+	private String usuarioId;
 	private int diaIni, mesIni, anoIni, horaIni, minutoIni;
 	private int diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc;
-	
-	
+
+
 	//construtor para curso gravado
-	
+
 	public Curso(String nomeCurso, String codigo, double preco, boolean cursoGravado,
-			boolean cursoAoVivo, boolean cursoIndividual) {
-		
+			boolean cursoAoVivo, boolean cursoIndividual, String usuarioId) {
+
 		this.nomeCurso = nomeCurso;
 		this.codigo = codigo;
 		this.preco = preco;
 		this.cursoGravado = cursoGravado;
 		this.cursoAoVivo = cursoAoVivo;
 		this.cursoIndividual = cursoIndividual;
-		
+		this.usuarioId = usuarioId;
+
 	}
-	
+
 	//construtor para curso ao vivo
-	
+
 	public Curso(String nomeCurso, String codigo, double preco, int vagas, boolean cursoGravado,
 			boolean cursoAoVivo, boolean cursoIndividual, int diaIni, int mesIni, int anoIni, int horaIni,
-			int minutoIni, int diaEnc, int mesEnc, int anoEnc, int horaEnc, int minutoEnc) {
+			int minutoIni, int diaEnc, int mesEnc, int anoEnc, int horaEnc, int minutoEnc, String usuarioId) {
 		super();
 		this.nomeCurso = nomeCurso;
 		this.codigo = codigo;
@@ -49,13 +51,14 @@ public class Curso {
 		this.anoEnc = anoEnc;
 		this.horaEnc = horaEnc;
 		this.minutoEnc = minutoEnc;
+		this.usuarioId = usuarioId;
 	}
 
 	//construtor para curso Individual
-	
+
 	public Curso(String nomeCurso, String codigo, double preco, boolean cursoGravado,
 			boolean cursoAoVivo, boolean cursoIndividual, int diaIni, int mesIni, int anoIni, int horaIni,
-			int minutoIni, int diaEnc, int mesEnc, int anoEnc, int horaEnc, int minutoEnc) {
+			int minutoIni, int diaEnc, int mesEnc, int anoEnc, int horaEnc, int minutoEnc, String usuarioId) {
 		super();
 		this.nomeCurso = nomeCurso;
 		this.codigo = codigo;
@@ -73,15 +76,16 @@ public class Curso {
 		this.anoEnc = anoEnc;
 		this.horaEnc = horaEnc;
 		this.minutoEnc = minutoEnc;
+		this.usuarioId = usuarioId;
 	}
-	
+
 	public double getPreco() {
 		return preco;
 	}
 
 	public void setPreco(double preco) {
 		if(preco>=0) {
-		this.preco = preco;}
+			this.preco = preco;}
 		else {
 			throw new IllegalArgumentException("Preco negativo invalido");
 		}
@@ -217,11 +221,16 @@ public class Curso {
 	public void setMinutoEnc(int minutoEnc) {
 		this.minutoEnc = minutoEnc;
 	}
+	
+	
+	public String toString() {
+		return String.format("titulo: %s, valor: R$ %s \t \n", this.nomeCurso, this.preco);
+	}
 
 
 
-	
-	
-	
-	
+
+
+
+
 }

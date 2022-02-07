@@ -18,7 +18,7 @@ public class UsuarioAuth {
 		try {
 			this.validacao.validacaoRegistrar(email, senha, cpf, cep, telefone);
 
-			this.usuario = new Usuario(nome, sobrenome, email, senha, telefone, cpf, cep, "comum", true);
+			this.usuario = new Usuario(nome, sobrenome, email, senha, telefone, cpf, cep, false, true);
 
 			BancoDeDados.armazenarUsuario(this.usuario);
 			System.out.printf("Cadastro feito com sucesso! \n");

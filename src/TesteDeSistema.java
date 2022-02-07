@@ -53,14 +53,14 @@ public class TesteDeSistema {
 		autenticacao.desconectar();
 		
 		//Caso de uso - listar usuários -> Perfil Adm
-		Administrador admin = new Administrador("Root", "Admin", "admin@gmail.com", "root123", "99999999", "12345678900", "44444444", "admin",false);
+		Usuario admin = new Usuario("Root", "Admin", "admin@gmail.com", "root123", "99999999", "12345678900", "44444444", true, false);
 		BancoDeDados.armazenarUsuario(admin);
 		
 		autenticacao.login("admin@gmail.com", "root123");
 		ArrayList<Usuario> usuarios = BancoDeDados.lerArmazenamentoUsuarios();
 
 		for(int i = 0; i < usuarios.size(); i++) {
-			if(usuarios.get(i).getTipo() == "admin" && usuarios.get(i).getAutenticado() == true) {
+			if(usuarios.get(i).getAdmin() == true && usuarios.get(i).getAutenticado() == true) {
 				
 				adm = true;
 			}
