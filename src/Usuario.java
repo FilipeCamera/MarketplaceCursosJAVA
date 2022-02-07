@@ -13,11 +13,11 @@ public class Usuario {
 	private String cpf;
 	private String cep;
 	private boolean autenticado;
-	private String tipo;
-	private ArrayList<Curso> cursosMatriculados;
+	private boolean admin;
 
+	public Usuario() {};
 
-	public Usuario(String nome, String sobrenome, String email, String senha, String telefone, String cpf, String cep, String tipo, boolean autenticado) {
+	public Usuario(String nome, String sobrenome, String email, String senha, String telefone, String cpf, String cep, boolean admin, boolean autenticado) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
@@ -26,7 +26,7 @@ public class Usuario {
 		this.cpf = cpf;
 		this.cep = cep;
 		this.autenticado = autenticado;
-		this.tipo = tipo;
+		this.admin = admin;
 	}
 
 	public String getEmail() {
@@ -37,8 +37,8 @@ public class Usuario {
 		return this.senha;
 	}
 	
-	public String getTipo() {
-		return this.tipo;
+	public boolean getAdmin() {
+		return this.admin;
 	}
 
 	public void setAutenticado(boolean autenticado) {
@@ -48,13 +48,13 @@ public class Usuario {
 	public boolean getAutenticado() {
 		return this.autenticado;
 	}
-
-	public void setCursoMatriculado(Curso curso) {
-		this.cursosMatriculados.add(curso);
+	
+	public String getId() {
+		return this.id;
 	}
 
 	// Função que retorna os dados do usuário;
 	public String toString() {
-		return String.format("id: %s \t nome: %s \t sobrenome: %s \t email: %s \t telefone: %s \t cpf: %s \t cep: %s \t tipo: %s \t autenticado: %s \n", this.id, this.nome, this.sobrenome, this.email, this.telefone, this.cpf, this.cep, this.tipo, this.autenticado);
+		return String.format("id: %s \t nome: %s \t sobrenome: %s \t email: %s \t telefone: %s \t cpf: %s \t cep: %s \t admin: %s \t autenticado: %s \n", this.id, this.nome, this.sobrenome, this.email, this.telefone, this.cpf, this.cep, this.admin, this.autenticado);
 	}
 }
