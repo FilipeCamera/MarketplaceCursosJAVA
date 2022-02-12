@@ -97,6 +97,10 @@ public class Curso {
 	public void setNomeCurso(String nomeCurso) {
 		this.nomeCurso = nomeCurso;
 	}
+	
+	public String getUsuarioId () {
+		return usuarioId;
+	}
 
 	public String getCodigo() {
 		return codigo;
@@ -222,7 +226,7 @@ public class Curso {
 	}
 
 	public String toString() {
-		return String.format("titulo: %s, valor: R$ %s \t \n", this.nomeCurso, this.preco);
+		return String.format("código: %s - titulo: %s - valor: R$ %s \t \n", this.codigo, this.nomeCurso, this.preco);
 	}
 
 }

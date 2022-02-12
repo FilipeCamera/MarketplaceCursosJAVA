@@ -65,12 +65,5 @@ public class UsuarioAuth {
 		return usuario;
 	}
 
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	
-
 	
 }
