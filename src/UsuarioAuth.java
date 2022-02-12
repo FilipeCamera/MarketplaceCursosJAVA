@@ -57,7 +57,9 @@ public class UsuarioAuth {
 				System.out.println("Você não está autenticado!");
 			}
 		}
-
-
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
 }

@@ -15,7 +15,8 @@ public class Usuario {
 	private boolean autenticado;
 	private boolean admin;
 
-
+	public Usuario() {};
+	
 	public Usuario(String nome, String sobrenome, String email, String senha, String telefone, String cpf, String cep, boolean admin, boolean autenticado) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;

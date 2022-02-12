@@ -19,6 +19,7 @@ public class Menu {
 
 		Scanner entrada = new Scanner(System.in);
 		autenticacao = new UsuarioAuth();
+		Usuario usuario = new Usuario();
 
 		Usuario administrador = new Usuario("Root", "Admin", "admin@gmail.com", "root123", "99999999", "12345678900", "44444444", true,false);
 		BancoDeDados.armazenarUsuario(administrador);
@@ -84,15 +85,7 @@ public class Menu {
 				break;
 
 			case 3:
-				Usuario usuario = null;
-
-				for(int i=0; i < usuarios.size(); i++) {
-					if(usuarios.get(i).getAutenticado() == true) {
-						usuario = usuarios.get(i);
-					}
-				}
-
-				if(usuario != null && usuario.getAutenticado() == true) {
+				if(usuario.getAutenticado() == true) {
 					System.out.print("Informe nome do curso:");
 					String nomeCurso = entrada.nextLine();
 					System.out.print("Informe tipo do curso (1-Gravado,2-Ao Vivo 3-Individual):");
@@ -145,16 +138,11 @@ public class Menu {
 
 				break;
 			case 4:
-				Usuario admin = null;
-				for(int i = 0; i < usuarios.size(); i++) {
-					if(usuarios.get(i).getAdmin() == true) {
-						admin = usuarios.get(i);
-					}
-				}
-
-				if(admin != null) {
+				if(usuario.getAdmin() == true) {
 					System.out.println(usuarios);
-				} 
+				} else {
+					System.out.println("Usuário não tem esse privilégio, você precisa ser administrador");
+				}
 
 				break;
 			case 5:
