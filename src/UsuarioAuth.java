@@ -38,15 +38,17 @@ public class UsuarioAuth {
 			for(int i = 0; i < this.usuarios.size(); i++) {
 				if(this.usuarios.get(i).getEmail().equals(email)) {
 					this.usuarios.get(i).setAutenticado(true);
-					
+					usuario=usuarios.get(i);
 					System.out.printf("Login feito com sucesso! \n");
+					
 				}
 			}
 		} catch(MensagemError e) {
 			System.out.printf("%s", e.getMessage());
-
 		}
+	
 	}
+	
 
 	public void desconectar() {
 		for(int i = 0; i < this.usuarios.size(); i++) {
@@ -62,4 +64,13 @@ public class UsuarioAuth {
 	public Usuario getUsuario() {
 		return usuario;
 	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	
+
+	
 }
