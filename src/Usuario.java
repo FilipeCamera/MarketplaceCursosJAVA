@@ -15,11 +15,9 @@ public class Usuario {
 	private boolean autenticado;
 	private boolean admin;
 
-	public Usuario() {
-	};
+	public Usuario() {};
 
-	public Usuario(String nome, String sobrenome, String email, String senha, String telefone, String cpf, String cep,
-			boolean admin, boolean autenticado) {
+	public Usuario(String nome, String sobrenome, String email, String senha, String telefone, String cpf, String cep, boolean admin, boolean autenticado) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
@@ -38,7 +36,7 @@ public class Usuario {
 	public String getSenha() {
 		return this.senha;
 	}
-
+	
 	public boolean getAdmin() {
 		return this.admin;
 	}
@@ -50,16 +48,13 @@ public class Usuario {
 	public boolean getAutenticado() {
 		return this.autenticado;
 	}
-
+	
 	public String getId() {
 		return this.id;
 	}
 
 	// Função que retorna os dados do usuário;
 	public String toString() {
-		return String.format(
-				"id: %s \t nome: %s \t sobrenome: %s \t email: %s \t telefone: %s \t cpf: %s \t cep: %s \t admin: %s \t autenticado: %s \n",
-				this.id, this.nome, this.sobrenome, this.email, this.telefone, this.cpf, this.cep, this.admin,
-				this.autenticado);
+		return String.format("id: %s \t nome: %s \t sobrenome: %s \t email: %s \t telefone: %s \t cpf: %s \t cep: %s \t admin: %s \t autenticado: %s \n", this.id, this.nome, this.sobrenome, this.email, this.telefone, this.cpf, this.cep, this.admin, this.autenticado);
 	}
 }

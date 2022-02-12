@@ -12,7 +12,8 @@ public class Curso {
 	private int diaIni, mesIni, anoIni, horaIni, minutoIni;
 	private int diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc;
 
-	// construtor para curso gravado
+
+	//construtor para curso gravado
 
 	public Curso(String nomeCurso, String codigo, double preco, boolean cursoGravado,
 			boolean cursoAoVivo, boolean cursoIndividual, String usuarioId) {
@@ -27,7 +28,7 @@ public class Curso {
 
 	}
 
-	// construtor para curso ao vivo
+	//construtor para curso ao vivo
 
 	public Curso(String nomeCurso, String codigo, double preco, int vagas, boolean cursoGravado,
 			boolean cursoAoVivo, boolean cursoIndividual, int diaIni, int mesIni, int anoIni, int horaIni,
@@ -53,7 +54,7 @@ public class Curso {
 		this.usuarioId = usuarioId;
 	}
 
-	// construtor para curso Individual
+	//construtor para curso Individual
 
 	public Curso(String nomeCurso, String codigo, double preco, boolean cursoGravado,
 			boolean cursoAoVivo, boolean cursoIndividual, int diaIni, int mesIni, int anoIni, int horaIni,
@@ -83,9 +84,9 @@ public class Curso {
 	}
 
 	public void setPreco(double preco) {
-		if (preco >= 0) {
-			this.preco = preco;
-		} else {
+		if(preco>=0) {
+			this.preco = preco;}
+		else {
 			throw new IllegalArgumentException("Preco negativo invalido");
 		}
 	}
@@ -111,7 +112,7 @@ public class Curso {
 	}
 
 	public void setVagas(int vagas) {
-		if (vagas != 0) {
+		if(vagas!=0){
 			this.vagas = vagas;
 			vagas--;
 		}
@@ -220,9 +221,16 @@ public class Curso {
 	public void setMinutoEnc(int minutoEnc) {
 		this.minutoEnc = minutoEnc;
 	}
-
+	
+	
 	public String toString() {
 		return String.format("titulo: %s, valor: R$ %s \t \n", this.nomeCurso, this.preco);
 	}
+
+
+
+
+
+
 
 }
