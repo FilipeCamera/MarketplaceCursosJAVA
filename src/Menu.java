@@ -92,61 +92,61 @@ public class Menu {
 					String codigoCurso=null;
 					boolean mostrarCursos= true;
 					boolean cursoEncontrado;
-					
+
 					while(mostrarCursos) {
-						
-					System.out.print("=====\t Cursos disponiveis \t=====\n");
-					
-					if (BancoDeDados.lerArmazenamentoCursos().size()>=quantidadeListados) {
-						for(int i=0;i<quantidadeListados;i++) {
-							System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
+
+						System.out.print("=====\t Cursos disponiveis \t=====\n");
+
+						if (BancoDeDados.lerArmazenamentoCursos().size()>=quantidadeListados) {
+							for(int i=0;i<quantidadeListados;i++) {
+								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
+							}
+
+						}else{
+							for(int i=0;i<BancoDeDados.lerArmazenamentoCursos().size();i++) {
+								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
+								quantidadeListados=BancoDeDados.lerArmazenamentoCursos().size();//informacao usada no proximo for
+							}
 						}
-						
-					}else{
-						for(int i=0;i<BancoDeDados.lerArmazenamentoCursos().size();i++) {
-							System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
-							quantidadeListados=BancoDeDados.lerArmazenamentoCursos().size();//informacao usada no proximo for
-						}
-					}
-					
-					System.out.println("Deseja detalhar algum curso?1-Sim, 2-Nao");
-						
+
+						System.out.println("Deseja detalhar algum curso?1-Sim, 2-Nao");
+
 						detalharCurso=entrada.nextInt();
 						entrada.nextLine();//limpando o buffer do teclado
-						
+
 						while(detalharCurso==1) {
-							
+
 							System.out.println("Infome codigo do curso:");
 							codigoCurso=entrada.nextLine();
-							
+
 							cursoEncontrado=false;//para a variavel voltar a ser falsa apos encontrar algum curso
 							for(int i=0;i<quantidadeListados;i++) {
-								
+
 								if(BancoDeDados.lerArmazenamentoCursos().get(i).getCodigo().equals(codigoCurso)) {
 									cursoEncontrado=true;
 									detalharCurso=2;//encerra o while
-									
+
 									if(BancoDeDados.lerArmazenamentoCursos().get(i).isCursoGravado()==true) {
-									System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
+										System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
 									}
 									else {
 										System.out.printf(BancoDeDados.lerArmazenamentoCursos().get(i)+"Inicia dia:%d/%d/%d as %d:%d \n",BancoDeDados.lerArmazenamentoCursos().get(i).getDiaIni(),BancoDeDados.lerArmazenamentoCursos().get(i).getMesIni(),BancoDeDados.lerArmazenamentoCursos().get(i).getAnoIni(),BancoDeDados.lerArmazenamentoCursos().get(i).getHoraIni(),BancoDeDados.lerArmazenamentoCursos().get(i).getMinutoIni());
-										}
-									
+									}
+
 								}	
 							}
-							
+
 							if(cursoEncontrado==false){
-						    	System.out.println("Curso n�o encontrado!Ainda deseja detalhar?1-Sim, 2-Nao");
-						    		detalharCurso=entrada.nextInt();
-						    		entrada.nextLine();//limpando o buffer do teclado
-						    }
-						    
+								System.out.println("Curso não encontrado!Ainda deseja detalhar?1-Sim, 2-Nao");
+								detalharCurso=entrada.nextInt();
+								entrada.nextLine();//limpando o buffer do teclado
+							}
+
 						}//fim segundo while 
-						
-					
-						
-					System.out.println("Listar mais 10 cursos? 1-Sim, 2-Nao 3-encerrar");
+
+
+
+						System.out.println("Listar mais 10 cursos? 1-Sim, 2-Nao 3-encerrar");
 						expandirLista=entrada.nextInt();
 						if(expandirLista==1){
 							quantidadeListados+=10;//permite mostrar mais 10 cursos
@@ -155,13 +155,13 @@ public class Menu {
 							mostrarCursos=false;//encerra a listagem de cursos
 						}
 					}
-						
+
 				}else {
 					System.out.println("Nao ha cursos cadastrados");
 				}
-				
+
 				break;
-				
+
 			case 3:
 				String codigo = UUID.randomUUID().toString();
 				if (usuario.getAutenticado() == true) {
@@ -312,10 +312,52 @@ public class Menu {
 				break;
 			case 6:
 				if (usuario.getAdmin() == true) {
-					System.out.println(usuarios);
-				} else {
-					System.out.println("Usuário não tem esse privilégio, você precisa ser administrador");
+					if(BancoDeDados.lerArmazenamentoUsuarios().size()!=0) {
+						int quantidadeListados=10;
+						int expandirLista;
+						int detalharCurso;						
+						boolean mostrarUsuarios = true;
+						boolean cursoEncontrado;
+
+						while(mostrarUsuarios) {
+
+							System.out.print("=====\t Usuários cadastrados na plataforma \t=====\n");
+
+							if (BancoDeDados.lerArmazenamentoUsuarios().size()>=quantidadeListados) {
+								for(int i=0;i<quantidadeListados;i++) {
+									System.out.println(BancoDeDados.lerArmazenamentoUsuarios().get(i) + "\t" + "Cursos criado: " + BancoDeDados.lerArmazenamentoUsuarios().get(i).getQuantCursoCriado());
+
+								}
+
+							}else{
+								for(int i=0;i<BancoDeDados.lerArmazenamentoUsuarios().size();i++) {
+									System.out.println(BancoDeDados.lerArmazenamentoUsuarios().get(i) + "\t" + "Cursos criado: " + BancoDeDados.lerArmazenamentoUsuarios().get(i).getQuantCursoCriado());
+									quantidadeListados=BancoDeDados.lerArmazenamentoUsuarios().size();
+								}
+							}
+
+							System.out.println("Listar mais 10 cursos? 1-Sim, 2-Nao 3-encerrar");
+							expandirLista=entrada.nextInt();
+							if(expandirLista==1){
+								quantidadeListados+=10;//permite mostrar mais 10 cursos
+							}
+							else if(expandirLista==3) {
+								mostrarUsuarios=false;//encerra a listagem de cursos
+							}
+							else {
+								break;
+							}
+						}
+
+
+					}else {
+						System.out.println("Nao ha cursos cadastrados");
+					}
 				}
+				else {
+					System.out.println("Função permitida somente para administradores");
+				}
+
 				break;
 			case 7:
 				ativo = false;

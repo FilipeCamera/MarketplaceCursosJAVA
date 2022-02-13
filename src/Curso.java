@@ -224,6 +224,16 @@ public class Curso {
 	public void setMinutoEnc(int minutoEnc) {
 		this.minutoEnc = minutoEnc;
 	}
+	
+	public String getDonoCurso() {
+		String nome = null;
+		for(Usuario donoCurso : BancoDeDados.lerArmazenamentoUsuarios()) {
+			if(this.usuarioId == donoCurso.getId()) {
+				nome = String.format("criador: %s", donoCurso.getNome());
+			}
+		}
+		return nome;
+	}
 
 	public String toString() {
 		return String.format("código: %s - titulo: %s - valor: R$ %s \t \n", this.codigo, this.nomeCurso, this.preco);

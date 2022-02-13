@@ -30,6 +30,10 @@ public class Usuario {
 		this.autenticado = autenticado;
 		this.admin = admin;
 	}
+	
+	public String getNome() {
+		return this.nome;
+	}
 
 	public String getEmail() {
 		return this.email;
@@ -49,6 +53,17 @@ public class Usuario {
 
 	public boolean getAutenticado() {
 		return this.autenticado;
+	}
+	
+	public int getQuantCursoCriado() {
+		int total = 0;
+		for(Curso cursoCriado : BancoDeDados.lerArmazenamentoCursos()) {
+			if(cursoCriado.getUsuarioId() == id) {
+				total++;
+			}
+		}
+		
+		return total;
 	}
 
 	public String getId() {
