@@ -7,14 +7,7 @@ public class Menu {
 	public Menu() {
 	}
 
-	public void executar() {
-		String nome;
-		String sobrenome;
-		String email;
-		String senha;
-		String cpf;
-		String cep;
-		String telefone;
+	public void exibirMenu() {
 		int options;
 		boolean ativo = true;
 
@@ -50,39 +43,10 @@ public class Menu {
 
 			switch (options) {
 			case 0:
-				System.out.print("Digite o seu nome: ");
-				nome = entrada.nextLine();
-
-				System.out.print("Digite o seu sobrenome: ");
-				sobrenome = entrada.nextLine();
-
-				System.out.print("Digite o seu email: ");
-				email = entrada.nextLine();
-
-				System.out.print("Digite o seu senha: ");
-				senha = entrada.nextLine();
-
-				System.out.print("Digite o seu cpf: ");
-				cpf = entrada.nextLine();
-
-				System.out.print("Digite o seu cep: ");
-				cep = entrada.nextLine();
-
-				System.out.print("Digite o seu telefone: ");
-				telefone = entrada.nextLine();
-
-				autenticacao.registrar(nome, sobrenome, email, senha, telefone, cpf, cep);
-				usuario = autenticacao.getUsuario();
+				usuario = new TelaDeRegistrarOuAutenticarUsuario().fazerRegistro(entrada);
 				break;
 			case 1:
-				System.out.print("Digite o seu email:\t");
-				email = entrada.next();
-
-				System.out.print("Digite o seu senha:\t");
-				senha = entrada.next();
-
-				autenticacao.login(email, senha);
-				usuario = autenticacao.getUsuario();
+				usuario = new TelaDeRegistrarOuAutenticarUsuario().autenticar(entrada);
 				break;
 
 			case 2:
@@ -221,7 +185,7 @@ public class Menu {
 				break;
 			case 4:
 				String escolhaCursoEditar;
-				if(usuario.getAutenticado() != true) {
+				if(usuario.getAutenticado() != true || usuario == null) {
 					System.out.println("Usuário precisa está autenticado para editar algum curso");
 				} else {
 					for(Curso cursoEditar : cursos) {
@@ -283,7 +247,7 @@ public class Menu {
 				break;
 			case 5:
 				String escolhaCursoDeletar;
-				if(usuario.getAutenticado() != true) {
+				if(usuario.getAutenticado() != true || usuario == null) {
 					System.out.println("Usuário precisa está autenticado para editar algum curso");
 				} else {
 					for(Curso cursoDeletar : cursos) {
@@ -311,53 +275,11 @@ public class Menu {
 				}
 				break;
 			case 6:
-				if (usuario.getAdmin() == true) {
-					if(BancoDeDados.lerArmazenamentoUsuarios().size()!=0) {
-						int quantidadeListados=10;
-						int expandirLista;
-						int detalharCurso;						
-						boolean mostrarUsuarios = true;
-						boolean cursoEncontrado;
-
-						while(mostrarUsuarios) {
-
-							System.out.print("=====\t Usuários cadastrados na plataforma \t=====\n");
-
-							if (BancoDeDados.lerArmazenamentoUsuarios().size()>=quantidadeListados) {
-								for(int i=0;i<quantidadeListados;i++) {
-									System.out.println(BancoDeDados.lerArmazenamentoUsuarios().get(i) + "\t" + "Cursos criado: " + BancoDeDados.lerArmazenamentoUsuarios().get(i).getQuantCursoCriado());
-
-								}
-
-							}else{
-								for(int i=0;i<BancoDeDados.lerArmazenamentoUsuarios().size();i++) {
-									System.out.println(BancoDeDados.lerArmazenamentoUsuarios().get(i) + "\t" + "Cursos criado: " + BancoDeDados.lerArmazenamentoUsuarios().get(i).getQuantCursoCriado());
-									quantidadeListados=BancoDeDados.lerArmazenamentoUsuarios().size();
-								}
-							}
-
-							System.out.println("Listar mais 10 cursos? 1-Sim, 2-Nao 3-encerrar");
-							expandirLista=entrada.nextInt();
-							if(expandirLista==1){
-								quantidadeListados+=10;//permite mostrar mais 10 cursos
-							}
-							else if(expandirLista==3) {
-								mostrarUsuarios=false;//encerra a listagem de cursos
-							}
-							else {
-								break;
-							}
-						}
-
-
-					}else {
-						System.out.println("Nao ha cursos cadastrados");
-					}
+				try {
+					new TelaDeMostrarUsuarios().listarUsuários(usuario, entrada);
+				} catch(MensagemError e) {
+					System.out.println(e.getMessage());
 				}
-				else {
-					System.out.println("Função permitida somente para administradores");
-				}
-
 				break;
 			case 7:
 				ativo = false;
@@ -373,4 +295,5 @@ public class Menu {
 		}
 		System.out.print("====== \t Muito Obrigado por usar nossa plataforma \t =====\n\n");
 	}
+
 }

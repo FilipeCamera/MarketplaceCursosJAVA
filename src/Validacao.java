@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 
 public class Validacao {
+	private ArrayList<Usuario> usuarios = BancoDeDados.lerArmazenamentoUsuarios();
+
 	public void validacaoRegistrar(String email, String senha, String cpf, String cep, String telefone) throws MensagemError {
-
-		ArrayList<Usuario> usuarios = BancoDeDados.lerArmazenamentoUsuarios();
-
 
 		if(email.length() == 0 || email.indexOf("@") <= 0) {
 			throw new MensagemError("Seu email não é válido");
@@ -21,9 +20,9 @@ public class Validacao {
 		else if(telefone.length() == 0 || telefone.length() < 8 || telefone.length() > 11) {
 			throw new MensagemError("Número de telefone inválido, tente novamente!");
 		}
-		else if(usuarios.size() != 0) {
-			for(int i = 0; i < usuarios.size(); i++) {
-				if (email == usuarios.get(i).getEmail()) {
+		else if(this.usuarios.size() != 0) {
+			for(int i = 0; i < this.usuarios.size(); i++) {
+				if (email == this.usuarios.get(i).getEmail()) {
 					throw new MensagemError("Usuário já existe!");
 				}
 			}
@@ -38,13 +37,11 @@ public class Validacao {
 			throw new MensagemError("A senha tem que ser maior que 6 caracteres, tente novamente!");
 		}
 
-		ArrayList<Usuario> usuarios = BancoDeDados.lerArmazenamentoUsuarios();
-		
-		if(usuarios.size() == 0) {
+		if(this.usuarios.size() == 0) {
 			throw new MensagemError("Nenhum usuário cadastrado!");
 		}
-		for(int i = 0; i < usuarios.size(); i++) {
-			if (email == usuarios.get(i).getEmail() && senha != usuarios.get(i).getSenha()) {
+		for(int i = 0; i < this.usuarios.size(); i++) {
+			if (email == this.usuarios.get(i).getEmail() && senha != this.usuarios.get(i).getSenha()) {
 				throw new MensagemError("E-mail ou senha incorretas!");
 			}
 		}

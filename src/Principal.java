@@ -4,7 +4,7 @@ public class Principal {
 		
 		Menu menu = new Menu();
 		
-		menu.executar();
+		menu.exibirMenu();
 		
 	}
 
