@@ -1,87 +1,17 @@
 
 public class Curso {
 
-	private String nomeCurso;
-	private String donoCurso;
-	private String codigo;
-	private double preco;
-	private int vagas;
-	private boolean cursoGravado;
-	private boolean cursoAoVivo;
-	private boolean cursoIndividual;
-	private String usuarioId;
-	private int diaIni, mesIni, anoIni, horaIni, minutoIni;
-	private int diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc;
+	protected String nomeCurso;
+	protected String codigo;
+	protected double preco;
+	protected String usuarioId;
+	protected int diaIni, mesIni, anoIni, horaIni, minutoIni;
+	protected int diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc;
 
-	// construtor para curso gravado
-
-	public Curso(String nomeCurso, String donoCurso, String codigo, double preco, boolean cursoGravado,
-			boolean cursoAoVivo, boolean cursoIndividual, String usuarioId) {
-
-		this.nomeCurso = nomeCurso;
-		this.donoCurso = donoCurso;
-		this.codigo = codigo;
-		this.preco = preco;
-		this.cursoGravado = cursoGravado;
-		this.cursoAoVivo = cursoAoVivo;
-		this.cursoIndividual = cursoIndividual;
-		this.usuarioId = usuarioId;
-
-	}
-
-	// construtor para curso ao vivo
-
-	public Curso(String nomeCurso, String donoCurso, String codigo, double preco, int vagas, boolean cursoGravado,
-			boolean cursoAoVivo, boolean cursoIndividual, int diaIni, int mesIni, int anoIni, int horaIni,
-			int minutoIni, int diaEnc, int mesEnc, int anoEnc, int horaEnc, int minutoEnc, String usuarioId) {
-		super();
-		this.nomeCurso = nomeCurso;
-		this.donoCurso = donoCurso;
-		this.codigo = codigo;
-		this.preco = preco;
-		this.vagas = vagas;
-		this.cursoGravado = cursoGravado;
-		this.cursoAoVivo = cursoAoVivo;
-		this.cursoIndividual = cursoIndividual;
-		this.diaIni = diaIni;
-		this.mesIni = mesIni;
-		this.anoIni = anoIni;
-		this.horaIni = horaIni;
-		this.minutoIni = minutoIni;
-		this.diaEnc = diaEnc;
-		this.mesEnc = mesEnc;
-		this.anoEnc = anoEnc;
-		this.horaEnc = horaEnc;
-		this.minutoEnc = minutoEnc;
-		this.usuarioId = usuarioId;
-	}
-
+	
 	// construtor para curso Individual
 
-	public Curso(String nomeCurso,String donoCurso, String codigo, double preco, boolean cursoGravado,
-			boolean cursoAoVivo, boolean cursoIndividual, int diaIni, int mesIni, int anoIni, int horaIni,
-			int minutoIni, int diaEnc, int mesEnc, int anoEnc, int horaEnc, int minutoEnc, String usuarioId) {
-		super();
-		this.nomeCurso = nomeCurso;
-		this.donoCurso = donoCurso;
-		this.codigo = codigo;
-		this.preco = preco;
-		this.cursoGravado = cursoGravado;
-		this.cursoAoVivo = cursoAoVivo;
-		this.cursoIndividual = cursoIndividual;
-		this.diaIni = diaIni;
-		this.mesIni = mesIni;
-		this.anoIni = anoIni;
-		this.horaIni = horaIni;
-		this.minutoIni = minutoIni;
-		this.diaEnc = diaEnc;
-		this.mesEnc = mesEnc;
-		this.anoEnc = anoEnc;
-		this.horaEnc = horaEnc;
-		this.minutoEnc = minutoEnc;
-		this.usuarioId = usuarioId;
-	}
-
+	
 	public double getPreco() {
 		return preco;
 	}
@@ -101,16 +31,6 @@ public class Curso {
 	public void setNomeCurso(String nomeCurso) {
 		this.nomeCurso = nomeCurso;
 	}
-	
-	
-	
-	public String getDonoCurso() {
-		return donoCurso;
-	}
-
-	public void setDonoCurso(String donoCurso) {
-		this.donoCurso = donoCurso;
-	}
 
 	public String getUsuarioId () {
 		return usuarioId;
@@ -122,41 +42,6 @@ public class Curso {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
-	}
-
-	public int getVagas() {
-		return vagas;
-	}
-
-	public void setVagas(int vagas) {
-		if (vagas != 0) {
-			this.vagas = vagas;
-			vagas--;
-		}
-	}
-
-	public boolean isCursoGravado() {
-		return cursoGravado;
-	}
-
-	public void setCursoGravado(boolean cursoGravado) {
-		this.cursoGravado = cursoGravado;
-	}
-
-	public boolean isCursoAoVivo() {
-		return cursoAoVivo;
-	}
-
-	public void setCursoAoVivo(boolean cursoAoVivo) {
-		this.cursoAoVivo = cursoAoVivo;
-	}
-
-	public boolean isCursoIndividual() {
-		return cursoIndividual;
-	}
-
-	public void setCursoIndividual(boolean cursoIndividual) {
-		this.cursoIndividual = cursoIndividual;
 	}
 
 	public int getDiaIni() {
@@ -237,6 +122,16 @@ public class Curso {
 
 	public void setMinutoEnc(int minutoEnc) {
 		this.minutoEnc = minutoEnc;
+	}
+
+	public String getDonoCurso() {
+		String nome = null;
+		for(Usuario donoCurso : BancoDeDados.lerArmazenamentoUsuarios()) {
+			if(this.usuarioId == donoCurso.getId()) {
+				nome = String.format("criador: %s", donoCurso.getNome());
+			}
+		}
+		return nome;
 	}
 
 	public String toString() {
