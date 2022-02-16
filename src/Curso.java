@@ -44,16 +44,6 @@ public class Curso {
 		return codigo;
 	}
 	
-	public String getDonoCurso() {
-		String nome = null;
-		for(Usuario donoCurso : BancoDeDados.lerArmazenamentoUsuarios()) {
-			if(this.criador == donoCurso) {
-				nome = String.format("criador: %s", donoCurso.getNome());
-			}
-		}
-		return nome;
-	}
-
 	public String toString() {
 		return String.format("código: %s - titulo: %s - valor: R$ %s \t \n", this.codigo, this.nomeCurso, this.preco);
 	}
