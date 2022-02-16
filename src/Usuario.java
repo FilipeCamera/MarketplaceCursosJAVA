@@ -58,7 +58,7 @@ public class Usuario {
 	public int getQuantCursoCriado() {
 		int total = 0;
 		for(Curso cursoCriado : BancoDeDados.lerArmazenamentoCursos()) {
-			if(cursoCriado.getUsuarioId() == id) {
+			if(cursoCriado.getCriador().getId() == id) {
 				total++;
 			}
 		}

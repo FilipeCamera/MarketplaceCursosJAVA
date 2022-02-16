@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TelaDeMostrarUsuarios {
+public class TelaUsuarios {
 	private int quantidadeListados = 10;
 	private int expandirLista;
 	private boolean mostrarUsuarios = true;
@@ -28,7 +28,7 @@ public class TelaDeMostrarUsuarios {
 						}
 					}
 
-					System.out.println("Listar mais 10 cursos? 1-Sim, 2-Nao 3-encerrar");
+					System.out.println("Listar mais 10 usuários? 1-Sim, 2-Nao 3-encerrar");
 					this.expandirLista=entrada.nextInt();
 					if(this.expandirLista==1){
 						this.quantidadeListados+=10;//permite mostrar mais 10 cursos

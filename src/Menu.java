@@ -4,9 +4,6 @@ import java.util.UUID;
 
 public class Menu {
 
-	public Menu() {
-	}
-
 	public void exibirMenu() {
 		int options;
 		boolean ativo = true;
@@ -50,233 +47,21 @@ public class Menu {
 				break;
 
 			case 2:
-				if(BancoDeDados.lerArmazenamentoCursos().size()!=0) {
-					int quantidadeListados=10;
-					int expandirLista, detalharCurso;
-					String codigoCurso=null;
-					boolean mostrarCursos= true;
-					boolean cursoEncontrado;
-
-					while(mostrarCursos) {
-
-						System.out.print("=====\t Cursos disponiveis \t=====\n");
-
-						if (BancoDeDados.lerArmazenamentoCursos().size()>=quantidadeListados) {
-							for(int i=0;i<quantidadeListados;i++) {
-								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
-							}
-
-						}else{
-							for(int i=0;i<BancoDeDados.lerArmazenamentoCursos().size();i++) {
-								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
-								quantidadeListados=BancoDeDados.lerArmazenamentoCursos().size();//informacao usada no proximo for
-							}
-						}
-
-						System.out.println("Deseja detalhar algum curso?1-Sim, 2-Nao");
-
-						detalharCurso=entrada.nextInt();
-						entrada.nextLine();//limpando o buffer do teclado
-
-						while(detalharCurso==1) {
-
-							System.out.println("Infome codigo do curso:");
-							codigoCurso=entrada.nextLine();
-
-							cursoEncontrado=false;//para a variavel voltar a ser falsa apos encontrar algum curso
-							for(int i=0;i<quantidadeListados;i++) {
-
-								if(BancoDeDados.lerArmazenamentoCursos().get(i).getCodigo().equals(codigoCurso)) {
-									cursoEncontrado=true;
-									detalharCurso=2;//encerra o while
-
-									if(BancoDeDados.lerArmazenamentoCursos().get(i).isCursoGravado()==true) {
-										System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
-									}
-									else {
-										System.out.printf(BancoDeDados.lerArmazenamentoCursos().get(i)+"Inicia dia:%d/%d/%d as %d:%d \n",BancoDeDados.lerArmazenamentoCursos().get(i).getDiaIni(),BancoDeDados.lerArmazenamentoCursos().get(i).getMesIni(),BancoDeDados.lerArmazenamentoCursos().get(i).getAnoIni(),BancoDeDados.lerArmazenamentoCursos().get(i).getHoraIni(),BancoDeDados.lerArmazenamentoCursos().get(i).getMinutoIni());
-									}
-
-								}	
-							}
-
-							if(cursoEncontrado==false){
-								System.out.println("Curso não encontrado!Ainda deseja detalhar?1-Sim, 2-Nao");
-								detalharCurso=entrada.nextInt();
-								entrada.nextLine();//limpando o buffer do teclado
-							}
-
-						}//fim segundo while 
-
-
-
-						System.out.println("Listar mais 10 cursos? 1-Sim, 2-Nao 3-encerrar");
-						expandirLista=entrada.nextInt();
-						if(expandirLista==1){
-							quantidadeListados+=10;//permite mostrar mais 10 cursos
-						}
-						if(detalharCurso==3 || expandirLista==3) {
-							mostrarCursos=false;//encerra a listagem de cursos
-						}
-					}
-
-				}else {
-					System.out.println("Nao ha cursos cadastrados");
-				}
-
+				new TelaCursos().listarCursos(entrada);
 				break;
 
 			case 3:
-				String codigo = UUID.randomUUID().toString();
-				if (usuario.getAutenticado() == true) {
-					System.out.print("Informe nome do curso:");
-					String nomeCurso = entrada.nextLine();
-					System.out.print("Informe tipo do curso (1-Gravado,2-Ao Vivo 3-Individual):");
-					int tipoCurso = entrada.nextInt();
-					entrada.nextLine();
-					System.out.print("Informe valor do curso:");
-					Double preco = entrada.nextDouble();
-
-					if (tipoCurso != 1) {
-						System.out.println("Informe dia que inicia o curso:");
-						int diaIni = entrada.nextInt();
-						System.out.println("Informe mes que inicia o curso:");
-						int mesIni = entrada.nextInt();
-						System.out.println("Informe ano que inicia o curso:");
-						int anoIni = entrada.nextInt();
-						System.out.println("Informe hora que inicia o curso:");
-						int horaIni = entrada.nextInt();
-						System.out.println("Informe minuto que inicia o curso:");
-						int minutoIni = entrada.nextInt();
-						System.out.println("Informe dia que encerra o curso:");
-						int diaEnc = entrada.nextInt();
-						System.out.println("Informe mes que encerra o curso:");
-						int mesEnc = entrada.nextInt();
-						System.out.println("Informe ano que encerra o curso:");
-						int anoEnc = entrada.nextInt();
-						System.out.println("Informe hora que encerra o curso:");
-						int horaEnc = entrada.nextInt();
-						System.out.println("Informe minuto que encerra o curso:");
-						int minutoEnc = entrada.nextInt();
-
-						if (tipoCurso == 2) {
-							System.out.println("Informe numero de vagas:");
-							int vagas = entrada.nextInt();
-							Curso curso = new Curso(nomeCurso, codigo, preco, vagas, false,
-									true, false, diaIni, mesIni, anoIni, horaIni, minutoIni, diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc,
-									usuario.getId());
-							BancoDeDados.armazenarCurso(curso);
-						}
-
-						if (tipoCurso == 3) {
-							Curso curso = new Curso(nomeCurso, codigo, preco, false, false, true, diaIni, mesIni, anoIni, horaIni,
-									minutoIni, diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc, usuario.getId());
-							BancoDeDados.armazenarCurso(curso);
-						}
-					} else {
-						Curso curso = new Curso(nomeCurso, codigo, preco, true, false, false, usuario.getId());
-						BancoDeDados.armazenarCurso(curso);
-					}
-
-				} else {
-					System.out.println("Para criar um curso o usuário precisa tá autenticado!");
-				}
-
+				new TelaCursos().criarCurso(usuario, entrada);
 				break;
 			case 4:
-				String escolhaCursoEditar;
-				if(usuario.getAutenticado() != true || usuario == null) {
-					System.out.println("Usuário precisa está autenticado para editar algum curso");
-				} else {
-					for(Curso cursoEditar : cursos) {
-						if(cursoEditar.getUsuarioId().equals(usuario.getId())) {
-							System.out.println("=====\t Seus cursos \t=====");
-							System.out.println(cursoEditar);
-						}
-					}
-					System.out.print("Escolha o curso que quer editar (código): ");
-					escolhaCursoEditar = entrada.nextLine();
-
-					for(Curso cursoEditar : cursos) {
-						if(cursoEditar.getCodigo().equals(escolhaCursoEditar) && cursoEditar.getUsuarioId().equals(usuario.getId())) {
-							System.out.print("Informe nome do curso:");
-							cursoEditar.setNomeCurso(entrada.nextLine());
-							System.out.print("Informe tipo do curso (1-Gravado,2-Ao Vivo 3-Individual):");
-							int tipoCurso = entrada.nextInt();
-							entrada.nextLine();
-							System.out.print("Informe valor do curso:");
-							cursoEditar.setPreco(entrada.nextDouble());
-
-							if (tipoCurso != 1) {
-								System.out.println("Informe dia que inicia o curso:");
-								cursoEditar.setDiaIni(entrada.nextInt());
-								System.out.println("Informe mes que inicia o curso:");
-								cursoEditar.setMesIni(entrada.nextInt());
-								System.out.println("Informe ano que inicia o curso:");
-								cursoEditar.setAnoIni(entrada.nextInt());
-								System.out.println("Informe hora que inicia o curso:");
-								cursoEditar.setHoraIni(entrada.nextInt());
-								System.out.println("Informe minuto que inicia o curso:");
-								cursoEditar.setMinutoIni(entrada.nextInt());
-								System.out.println("Informe dia que encerra o curso:");
-								cursoEditar.setDiaEnc(entrada.nextInt());
-								System.out.println("Informe mes que encerra o curso:");
-								cursoEditar.setMesEnc(entrada.nextInt());
-								System.out.println("Informe ano que encerra o curso:");
-								cursoEditar.setAnoEnc(entrada.nextInt());
-								System.out.println("Informe hora que encerra o curso:");
-								cursoEditar.setHoraEnc(entrada.nextInt());
-								System.out.println("Informe minuto que encerra o curso:");
-								cursoEditar.setMinutoEnc(entrada.nextInt());
-
-								if (tipoCurso == 2) {
-									System.out.println("Informe numero de vagas:");
-									cursoEditar.setVagas(entrada.nextInt());
-
-								}
-							}
-
-							System.out.println("Alteração feita com sucesso!");
-							break;
-						} else {
-							System.out.println("Tivemos um problema, por favor tente novamente mais tarde.");
-							break;
-						}
-					}
-				}
+				new TelaCursos().editarCurso(usuario, entrada, cursos);
 				break;
 			case 5:
-				String escolhaCursoDeletar;
-				if(usuario.getAutenticado() != true || usuario == null) {
-					System.out.println("Usuário precisa está autenticado para editar algum curso");
-				} else {
-					for(Curso cursoDeletar : cursos) {
-						if(cursoDeletar.getUsuarioId().equals(usuario.getId())) {
-							System.out.println("=====\t Seus cursos \t=====");
-							System.out.println(cursoDeletar);
-						}
-					}
-					System.out.print("Escolha o curso que quer editar (código): ");
-					escolhaCursoDeletar = entrada.nextLine();
-
-					for(Curso cursoDeletar : cursos) {
-						if(cursoDeletar.getCodigo().equals(escolhaCursoDeletar) && cursoDeletar.getUsuarioId().equals(usuario.getId())) {
-
-							cursos.remove(cursoDeletar);
-
-
-							System.out.println("Curso excluido com sucesso!");
-							break;
-						} else {
-							System.out.println("Tivemos um problema, por favor tente novamente mais tarde.");
-							break;
-						}
-					}
-				}
+				new TelaCursos().excluirCurso(usuario, entrada, cursos);
 				break;
 			case 6:
 				try {
-					new TelaDeMostrarUsuarios().listarUsuários(usuario, entrada);
+					new TelaUsuarios().listarUsuários(usuario, entrada);
 				} catch(MensagemError e) {
 					System.out.println(e.getMessage());
 				}

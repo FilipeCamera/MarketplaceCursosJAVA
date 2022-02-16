@@ -8,6 +8,7 @@ public class TesteDeSistema {
 		Scanner input = new Scanner(System.in);
 		Usuario usuario;
 		
+		ArrayList<Curso> cursos = BancoDeDados.lerArmazenamentoCursos();
 		
 		//Teste de Cadastrar Usuário
 		usuario = new TelaDeRegistrarOuAutenticarUsuario().fazerRegistro(input);
@@ -19,12 +20,20 @@ public class TesteDeSistema {
 		
 		//Teste de Mostrar Usuários da Plataforma - caso for administrador
 		try {
-			new TelaDeMostrarUsuarios().listarUsuários(usuario, input);
+			new TelaUsuarios().listarUsuários(usuario, input);
 		} catch(MensagemError e) {
 			System.out.println(e.getMessage());
 		}
 
-
+		// Teste de listar, editar e excluir cursos
+		
+		new TelaCursos().listarCursos(input);
+		
+		new TelaCursos().editarCurso(usuario, input, cursos);
+		
+		new TelaCursos().excluirCurso(usuario, input, cursos);
+		
+		
 	}
 
 }
