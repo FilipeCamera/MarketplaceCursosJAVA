@@ -31,7 +31,7 @@ public class Menu {
 			System.out.print("\t 4 - Editar curso \n");
 			System.out.print("\t 5 - Excluir curso \n");
 			System.out.print("\t 6 - Ver usuários \n");
-			System.out.print("\t 7 - alguma função \n");
+			System.out.print("\t 7 - Comprar curso \n");
 			System.out.print("\t 8 - Desconectar \n");
 			System.out.print("\t 9 - Sair \n");
 			System.out.print("\n\nEscolha sua opção: ");

@@ -44,12 +44,12 @@ public class TelaCursos {
 							cursoEncontrado=true;
 							detalharCurso=2;//encerra o while
 
-							if(BancoDeDados.lerArmazenamentoCursos().get(i) instanceof CursoGravado) {
+							if(BancoDeDados.lerArmazenamentoCursos().get(i) instanceof Curso) {
 								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
 							}
 							else {
-								CursoDataHora cursoDataHora = (CursoDataHora) BancoDeDados.lerArmazenamentoCursos().get(i);
-								System.out.printf(cursoDataHora+"Inicia dia:%d/%d/%d as %d:%d \n",cursoDataHora.getDiaIni(),cursoDataHora.getMesIni(),cursoDataHora.getAnoIni(),cursoDataHora.getHoraIni(),cursoDataHora.getMinutoIni());
+								CursoAoVivo cursoAoVivo = (CursoAoVivo) BancoDeDados.lerArmazenamentoCursos().get(i);
+								System.out.printf(cursoAoVivo+"Inicia dia:%d/%d/%d as %d:%d \n",cursoAoVivo.getDiaIni(),cursoAoVivo.getMesIni(),cursoAoVivo.getAnoIni(),cursoAoVivo.getHoraIni(),cursoAoVivo.getMinutoIni());
 							}
 
 						}	
@@ -84,7 +84,7 @@ public class TelaCursos {
 		if (usuario != null && usuario.getAutenticado() == true) {
 			System.out.print("Informe nome do curso:");
 			String nomeCurso = entrada.nextLine();
-			System.out.print("Informe tipo do curso (1-Gravado,2-Ao Vivo 3-Individual):");
+			System.out.print("Informe tipo do curso (1- Gravado\t2- Com limite de vagas\t3- Ao vivo):");
 			int tipoCurso = entrada.nextInt();
 			entrada.nextLine();
 			System.out.print("Informe valor do curso:");
@@ -115,18 +115,18 @@ public class TelaCursos {
 				if (tipoCurso == 2) {
 					System.out.println("Informe numero de vagas:");
 					int vagas = entrada.nextInt();
-					Curso curso = new CursoAoVivo(nomeCurso, preco, diaIni, mesIni, anoIni, horaIni, minutoIni, diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc,
+					Curso curso = new CursoVagas(nomeCurso, preco, diaIni, mesIni, anoIni, horaIni, minutoIni, diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc,
 							usuario, vagas);
 					BancoDeDados.armazenarCurso(curso);
 				}
 
 				if (tipoCurso == 3) {
-					Curso curso = new CursoIndividual(nomeCurso, preco, diaIni, mesIni, anoIni, horaIni,
+					Curso curso = new CursoAoVivo(nomeCurso, preco, diaIni, mesIni, anoIni, horaIni,
 							minutoIni, diaEnc, mesEnc, anoEnc, horaEnc, minutoEnc, usuario);
 					BancoDeDados.armazenarCurso(curso);
 				}
 			} else {
-				Curso curso = new CursoGravado(nomeCurso, preco, usuario);
+				Curso curso = new Curso(nomeCurso, preco, usuario);
 				BancoDeDados.armazenarCurso(curso);
 			}
 
@@ -157,8 +157,8 @@ public class TelaCursos {
 					System.out.print("Informe valor do curso:");
 					cursoEditar.setPreco(entrada.nextDouble());
 
-					if (cursoEditar instanceof CursoAoVivo) {
-						CursoAoVivo cursoAoVivoEditar = (CursoAoVivo) cursoEditar;
+					if (cursoEditar instanceof CursoVagas) {
+						CursoVagas cursoAoVivoEditar = (CursoVagas) cursoEditar;
 						System.out.println("Informe dia que inicia o curso:");
 						cursoAoVivoEditar.setDiaIni(entrada.nextInt());
 						System.out.println("Informe mes que inicia o curso:");
@@ -183,8 +183,8 @@ public class TelaCursos {
 						cursoAoVivoEditar.setVagas(entrada.nextInt());
 						
 					}
-					if (cursoEditar instanceof CursoIndividual) {
-						CursoIndividual cursoIndividualEditar = (CursoIndividual) cursoEditar;
+					if (cursoEditar instanceof CursoAoVivo) {
+						CursoAoVivo cursoIndividualEditar = (CursoAoVivo) cursoEditar;
 						System.out.println("Informe dia que inicia o curso:");
 						cursoIndividualEditar.setDiaIni(entrada.nextInt());
 						System.out.println("Informe mes que inicia o curso:");
