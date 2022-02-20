@@ -22,7 +22,7 @@ public class TelaCursos {
 
 				}else{
 					for(int i=0;i<BancoDeDados.lerArmazenamentoCursos().size();i++) {
-						System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
+						System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i).toString());
 						quantidadeListados=BancoDeDados.lerArmazenamentoCursos().size();//informacao usada no proximo for
 					}
 				}
@@ -44,12 +44,13 @@ public class TelaCursos {
 							cursoEncontrado=true;
 							detalharCurso=2;//encerra o while
 
-							if(BancoDeDados.lerArmazenamentoCursos().get(i) instanceof Curso) {
-								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
-							}
-							else {
+							if(BancoDeDados.lerArmazenamentoCursos().get(i) instanceof CursoAoVivo) {
 								CursoAoVivo cursoAoVivo = (CursoAoVivo) BancoDeDados.lerArmazenamentoCursos().get(i);
 								System.out.printf(cursoAoVivo+"Inicia dia:%d/%d/%d as %d:%d \n",cursoAoVivo.getDiaIni(),cursoAoVivo.getMesIni(),cursoAoVivo.getAnoIni(),cursoAoVivo.getHoraIni(),cursoAoVivo.getMinutoIni());
+								
+							}else {
+								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
+							
 							}
 
 						}	

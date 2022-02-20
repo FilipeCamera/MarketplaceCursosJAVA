@@ -61,7 +61,7 @@ public class Menu {
 				break;
 			case 6:
 				try {
-					new TelaUsuarios().listarUsuários(usuario, entrada);
+					new TelaUsuarios().listarUsuarios(usuario, entrada);
 				} catch(MensagemError e) {
 					System.out.println(e.getMessage());
 				}

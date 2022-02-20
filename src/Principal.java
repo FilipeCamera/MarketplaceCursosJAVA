@@ -10,6 +10,7 @@ public class Principal {
 		
 		carregado = loadingBd.carregar();
 		
+		
 		if(carregado) {
 			menu.exibirMenu();
 		} else {
