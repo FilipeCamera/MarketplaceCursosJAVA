@@ -46,7 +46,7 @@ public class TelaCursos {
 
 							if(BancoDeDados.lerArmazenamentoCursos().get(i) instanceof CursoAoVivo) {
 								CursoAoVivo cursoAoVivo = (CursoAoVivo) BancoDeDados.lerArmazenamentoCursos().get(i);
-								System.out.printf(cursoAoVivo+"Inicia dia:%d/%d/%d as %d:%d \n",cursoAoVivo.getDiaIni(),cursoAoVivo.getMesIni(),cursoAoVivo.getAnoIni(),cursoAoVivo.getHoraIni(),cursoAoVivo.getMinutoIni());
+								System.out.printf("Dados do curso: \n %s Criador: %s \n Inicia dia: %d/%d/%d as %d:%d \n Encerra dia: %d/%d/%d as %d:%d \n", cursoAoVivo, cursoAoVivo.getCriador().getNome(),cursoAoVivo.getDiaIni(),cursoAoVivo.getMesIni(),cursoAoVivo.getAnoIni(),cursoAoVivo.getHoraIni(),cursoAoVivo.getMinutoIni(), cursoAoVivo.getDiaEnc(),cursoAoVivo.getMesEnc(),cursoAoVivo.getAnoEnc(),cursoAoVivo.getHoraEnc(),cursoAoVivo.getMinutoEnc());
 								
 							}else {
 								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
@@ -82,7 +82,7 @@ public class TelaCursos {
 	}
 	
 	public void criarCurso(Usuario usuario, Scanner entrada) {
-		if (usuario != null && usuario.getAutenticado() == true) {
+		if (usuario != null && usuario.getAutenticado() == true && usuario.getAdmin() != true) {
 			System.out.print("Informe nome do curso:");
 			String nomeCurso = entrada.nextLine();
 			System.out.print("Informe tipo do curso (1- Gravado\t2- Com limite de vagas\t3- Ao vivo):");

@@ -14,10 +14,6 @@ public class Menu {
 		autenticacao = new UsuarioAuth();
 		Usuario usuario = null;
 
-		Usuario administrador = new Usuario("Root", "Admin", "admin@gmail.com", "root123", "99999999", "12345678900",
-				"44444444", true, false);
-		BancoDeDados.armazenarUsuario(administrador);
-
 		ArrayList<Usuario> usuarios = BancoDeDados.lerArmazenamentoUsuarios();
 		ArrayList<Curso> cursos = BancoDeDados.lerArmazenamentoCursos();
 
@@ -67,7 +63,8 @@ public class Menu {
 				}
 				break;
 			case 7:
-				ativo = false;
+				System.out.println("Por enquanto essa funcionalidade não está disponível");
+				
 				break;
 			case 8:
 				autenticacao.desconectar();

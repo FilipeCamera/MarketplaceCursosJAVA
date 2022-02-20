@@ -35,10 +35,10 @@ public class UsuarioAuth {
 	public void login(String email, String senha) {
 		try {
 			this.validacao.validacaoLogin(email, senha);
-			for(int i = 0; i < this.usuarios.size(); i++) {
-				if(this.usuarios.get(i).getEmail().equals(email)) {
-					this.usuarios.get(i).setAutenticado(true);
-					usuario=usuarios.get(i);
+			for(Usuario usuario : this.usuarios) {
+				if(usuario.getEmail().equals(email)) {
+					usuario.setAutenticado(true);
+					this.usuario = usuario;
 					System.out.printf("Login feito com sucesso! \n");
 					
 				}
@@ -51,13 +51,19 @@ public class UsuarioAuth {
 	
 
 	public void desconectar() {
-		for(int i = 0; i < this.usuarios.size(); i++) {
-			if(this.usuarios.get(i).getAutenticado() == true) {
-				this.usuarios.get(i).setAutenticado(false);
+		boolean notAutenticado = false;
+		for (Usuario usuario : this.usuarios) {
+			if(usuario.getAutenticado() == true) {
+				usuario.setAutenticado(false);
+				notAutenticado = false;
 				System.out.println("Você agora está desconectado!");
+				return;
 			} else {
-				System.out.println("Você não está autenticado!");
+				notAutenticado = true;
 			}
+		}
+		if(notAutenticado) {
+			System.out.println("Usuário não está autenticado");
 		}
 	}
 	

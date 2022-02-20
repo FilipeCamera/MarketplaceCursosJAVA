@@ -30,7 +30,6 @@ public class LoadingBancoDeDados {
 		for(int i = 0; i < 3; i++) {
 			Usuario usuario = new Usuario(nomes[i], sobrenomes[i], emails[i], senhas[i], telefones[i], cpfs[i], ceps[i], false, false);
 			BancoDeDados.armazenarUsuario(usuario);
-			this.carregado = true;
 		}
 		 Usuario[] usuario = {BancoDeDados.lerArmazenamentoUsuarios().get(0),
 				BancoDeDados.lerArmazenamentoUsuarios().get(1),
@@ -64,7 +63,7 @@ public class LoadingBancoDeDados {
 			BancoDeDados.armazenarCurso(curso);
 		}
 		
-		//CRIANDO 7 CURSOS INDIVIDUAIS
+		//CRIANDO 7 CURSOS AO VIVO
 		
 		for(int k = 7; k < 14; k++){
 		Curso curso = new CursoAoVivo(nomeCurso[k],preco[k], diaIni[k-7], mesIni[k-7], anoIni[k-7], horaIni[k-7], minutoIni[k-7], diaEnc[k-7],
@@ -73,14 +72,20 @@ public class LoadingBancoDeDados {
 	}
 
 			
-	//CRIANDO 7 CURSOS AO VIVO
+	//CRIANDO 7 CURSOS COM LIMITE DE VAGAS
 		
 		for(int l = 14; l < 21; l++){
 			Curso curso = new CursoVagas(nomeCurso[l],preco[l], diaIni[l-7], mesIni[l-7], anoIni[l-7], horaIni[l-7], minutoIni[l-7], diaEnc[l-7],
 			mesEnc[l-7], anoEnc[l-7], horaEnc[l-7], minutoEnc[l-7], usuario[l], vagas[l-14]);
 			BancoDeDados.armazenarCurso(curso);
 			
-		}	
+		}
+		
+		Usuario administrador = new Usuario("Root", "Admin", "admin@email.com", "root123", "99999999", "12345678900",
+				"44444444", true, false);
+		BancoDeDados.armazenarUsuario(administrador);
+		
+		this.carregado = true;
 
 		return carregado;
 	}
