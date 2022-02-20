@@ -20,7 +20,7 @@ public class TesteDeSistema {
 		
 		//Teste de Mostrar Usuários da Plataforma - caso for administrador
 		try {
-			new TelaUsuarios().listarUsuários(usuario, input);
+			new TelaUsuarios().listarUsuarios(usuario, input);
 		} catch(MensagemError e) {
 			System.out.println(e.getMessage());
 		}

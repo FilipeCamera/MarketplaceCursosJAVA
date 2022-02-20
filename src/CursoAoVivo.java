@@ -100,5 +100,7 @@ public class CursoAoVivo extends Curso {
 	public void setMinutoEnc(int minutoEnc) {
 		this.minutoEnc = minutoEnc;
 	}
+	
+
 
 }

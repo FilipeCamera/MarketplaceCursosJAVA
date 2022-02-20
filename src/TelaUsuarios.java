@@ -5,7 +5,7 @@ public class TelaUsuarios {
 	private int expandirLista;
 	private boolean mostrarUsuarios = true;
 
-	public void listarUsuários(Usuario usuario, Scanner entrada) throws MensagemError {
+	public void listarUsuarios(Usuario usuario, Scanner entrada) throws MensagemError {
 		if(usuario == null) {
 			throw new MensagemError("Usuário não autenticado");
 		}
