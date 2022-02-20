@@ -8,9 +8,11 @@ public class Principal {
 		
 		System.out.print("Carregando...");
 		
+		// carrega o Banco de dados
 		carregado = loadingBd.carregar();
 		
 		
+		// exibe o menu se tiver carregado o banco de dados
 		if(carregado) {
 			menu.exibirMenu();
 		} else {

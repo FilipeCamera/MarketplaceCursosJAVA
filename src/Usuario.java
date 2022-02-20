@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
-// Classe do usuário
+// Classe Usuário
 
 public class Usuario {
-	private String id = UUID.randomUUID().toString();
+	private String id = UUID.randomUUID().toString(); // id de identificação do usuário
 	private String nome;
 	private String sobrenome;
 	private String email;
@@ -31,30 +31,37 @@ public class Usuario {
 		this.admin = admin;
 	}
 	
+	// função que retorna o nome
 	public String getNome() {
 		return this.nome;
 	}
 
+	// função que retorna o e-mail
 	public String getEmail() {
 		return this.email;
 	}
 
+	// função que retorna a senha
 	public String getSenha() {
 		return this.senha;
 	}
-
+	
+	// função que retorna se o usuário é administrador ou n
 	public boolean getAdmin() {
 		return this.admin;
 	}
-
+	
+	// função que seta se o usuário vai está autenticado ou não
 	public void setAutenticado(boolean autenticado) {
 		this.autenticado = autenticado;
 	}
-
+	
+	// função que retorna se o usuário está autenticado
 	public boolean getAutenticado() {
 		return this.autenticado;
 	}
 	
+	// função que retorna a quatidadde de curso criado pelo usuário
 	public int getQuantCursoCriado() {
 		int total = 0;
 		for(Curso cursoCriado : BancoDeDados.lerArmazenamentoCursos()) {
@@ -66,6 +73,7 @@ public class Usuario {
 		return total;
 	}
 
+	// função que retorna o ID do usuário
 	public String getId() {
 		return this.id;
 	}

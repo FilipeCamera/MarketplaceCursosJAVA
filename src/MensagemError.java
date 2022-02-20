@@ -1,4 +1,4 @@
-// Classe de validação
+// Classe MensagemError - responsável pela exceções dentro da aplicação
 
 public class MensagemError extends Exception {
 	

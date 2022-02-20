@@ -1,14 +1,20 @@
 import java.util.Scanner;
 
+/* Classe TelaUsuarios - responsável por mostrar os usuários cadastrados na plataforma se o usuário 
+ for administrador */
+
 public class TelaUsuarios {
 	private int quantidadeListados = 10;
 	private int expandirLista;
 	private boolean mostrarUsuarios = true;
 
+	// função de mostrar os usuários
 	public void listarUsuarios(Usuario usuario, Scanner entrada) throws MensagemError {
-		if(usuario == null) {
+		// verifica se tem algum usuário autenticado
+		if(usuario == null || usuario.getAutenticado() != true) {
 			throw new MensagemError("Usuário não autenticado");
 		}
+		// verifca se o usuário é admin
 		else if (usuario.getAdmin() == true) {
 			if(BancoDeDados.lerArmazenamentoUsuarios().size()!=0) {
 				while(mostrarUsuarios) {

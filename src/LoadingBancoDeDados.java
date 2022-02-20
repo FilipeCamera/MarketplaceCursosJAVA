@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+// Classe LoadingBancoDeDados - responsável pelo carregamento inicial da plataforma criando alguns usuários e produtos
+
 public class LoadingBancoDeDados {
 	private String[] nomes = {"Alan", "Maria", "Francisco"};
 	private String[] sobrenomes = {"Souza", "Eduarda", "Neto"};
@@ -25,8 +27,10 @@ public class LoadingBancoDeDados {
 	private int[] vagas = {50,60,45,35,40,32,25};
 
 
+	// função que irá fazer o carregamento do banco e armazenar os dados e retornar true caso seja carregado;
 	public boolean carregar() {
 
+		// armazena usuario no banco de dados
 		for(int i = 0; i < 3; i++) {
 			Usuario usuario = new Usuario(nomes[i], sobrenomes[i], emails[i], senhas[i], telefones[i], cpfs[i], ceps[i], false, false);
 			BancoDeDados.armazenarUsuario(usuario);
@@ -81,6 +85,7 @@ public class LoadingBancoDeDados {
 
 		}
 
+		// armazena um usuário administrador
 		Usuario administrador = new Usuario("Root", "Admin", "admin@email.com", "root123", "99999999", "12345678900",
 				"44444444", true, false);
 		BancoDeDados.armazenarUsuario(administrador);

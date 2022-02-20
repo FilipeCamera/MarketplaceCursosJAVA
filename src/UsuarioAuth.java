@@ -50,6 +50,7 @@ public class UsuarioAuth {
 	}
 	
 
+	// função que faz a desautenticação do usuário
 	public void desconectar() {
 		boolean notAutenticado = false;
 		for (Usuario usuario : this.usuarios) {
@@ -62,11 +63,14 @@ public class UsuarioAuth {
 				notAutenticado = true;
 			}
 		}
+		
+		// se o usuario não está autenticado retorna essa mensagem
 		if(notAutenticado) {
 			System.out.println("Usuário não está autenticado");
 		}
 	}
 	
+	// função que retorna o usuário autenticado
 	public Usuario getUsuario() {
 		return usuario;
 	}

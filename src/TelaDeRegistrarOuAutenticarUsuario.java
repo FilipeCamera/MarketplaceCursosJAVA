@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/* Classe responsável por mostrar a tela de fazer registro ou de autenticar */
+
+
 public class TelaDeRegistrarOuAutenticarUsuario {
 	private String nome;
 	private String sobrenome;

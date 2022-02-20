@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/* Classe responsável por mostrar a listagem de cursos, criação, edição e remoção de curso */
+
 public class TelaCursos {
 
+	// função de listar cursos
 	public void listarCursos(Scanner entrada) {
 		if(BancoDeDados.lerArmazenamentoCursos().size()!=0) {
 			int quantidadeListados=10;
@@ -85,6 +88,7 @@ public class TelaCursos {
 		}
 	}
 
+	// função de criar curso
 	public void criarCurso(Usuario usuario, Scanner entrada) {
 		if (usuario != null && usuario.getAutenticado() == true && usuario.getAdmin() != true) {
 			System.out.print("Informe nome do curso:");
@@ -140,6 +144,7 @@ public class TelaCursos {
 		}
 	}
 
+	// função de editar
 	public void editarCurso(Usuario usuario, Scanner entrada, ArrayList<Curso> cursos) {
 		String escolhaCursoEditar;
 		if(usuario == null || usuario.getAutenticado() != true) {
@@ -185,7 +190,12 @@ public class TelaCursos {
 						System.out.println("Informe minuto que encerra o curso:");
 						cursoAoVivoEditar.setMinutoEnc(entrada.nextInt());
 						System.out.println("Informe numero de vagas:");
-						cursoAoVivoEditar.setVagas(entrada.nextInt());
+						try {
+							cursoAoVivoEditar.setVagas(entrada.nextInt());
+						} catch (MensagemError e) {
+							// TODO Auto-generated catch block
+							System.out.println(e.getMessage());
+						}
 
 					}
 					if (cursoEditar instanceof CursoAoVivo) {
@@ -223,6 +233,7 @@ public class TelaCursos {
 		}
 	}
 
+	// função de remover curso
 	public void excluirCurso(Usuario usuario, Scanner entrada, ArrayList<Curso> cursos) {
 		String escolhaCursoDeletar;
 		if(usuario == null || usuario.getAutenticado() != true) {
