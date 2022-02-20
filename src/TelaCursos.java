@@ -44,13 +44,17 @@ public class TelaCursos {
 							cursoEncontrado=true;
 							detalharCurso=2;//encerra o while
 
-							if(BancoDeDados.lerArmazenamentoCursos().get(i) instanceof CursoAoVivo) {
+							if(BancoDeDados.lerArmazenamentoCursos().get(i) instanceof CursoVagas) {
+								CursoVagas cursoVagas = (CursoVagas) BancoDeDados.lerArmazenamentoCursos().get(i);
+								System.out.printf("Dados do curso: \n %s Criador: %s \n Inicia: %d/%d/%d as %d:%d \n Encerra: %d/%d/%d as %d:%d \n Quantidade de vagas: %d \n", cursoVagas, cursoVagas.getCriador().getNome(),cursoVagas.getDiaIni(),cursoVagas.getMesIni(),cursoVagas.getAnoIni(),cursoVagas.getHoraIni(),cursoVagas.getMinutoIni(), cursoVagas.getDiaEnc(),cursoVagas.getMesEnc(),cursoVagas.getAnoEnc(),cursoVagas.getHoraEnc(),cursoVagas.getMinutoEnc(), cursoVagas.getVagas());
+							} 
+							else if(BancoDeDados.lerArmazenamentoCursos().get(i) instanceof CursoAoVivo) {
 								CursoAoVivo cursoAoVivo = (CursoAoVivo) BancoDeDados.lerArmazenamentoCursos().get(i);
-								System.out.printf("Dados do curso: \n %s Criador: %s \n Inicia dia: %d/%d/%d as %d:%d \n Encerra dia: %d/%d/%d as %d:%d \n", cursoAoVivo, cursoAoVivo.getCriador().getNome(),cursoAoVivo.getDiaIni(),cursoAoVivo.getMesIni(),cursoAoVivo.getAnoIni(),cursoAoVivo.getHoraIni(),cursoAoVivo.getMinutoIni(), cursoAoVivo.getDiaEnc(),cursoAoVivo.getMesEnc(),cursoAoVivo.getAnoEnc(),cursoAoVivo.getHoraEnc(),cursoAoVivo.getMinutoEnc());
-								
+								System.out.printf("Dados do curso: \n %s Criador: %s \n Inicia: %d/%d/%d as %d:%d \n Encerra: %d/%d/%d as %d:%d \n", cursoAoVivo, cursoAoVivo.getCriador().getNome(), cursoAoVivo.getDiaIni(),cursoAoVivo.getMesIni(),cursoAoVivo.getAnoIni(),cursoAoVivo.getHoraIni(),cursoAoVivo.getMinutoIni(), cursoAoVivo.getDiaEnc(),cursoAoVivo.getMesEnc(),cursoAoVivo.getAnoEnc(),cursoAoVivo.getHoraEnc(),cursoAoVivo.getMinutoEnc());
+
 							}else {
 								System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
-							
+
 							}
 
 						}	
@@ -80,7 +84,7 @@ public class TelaCursos {
 			System.out.println("Nao ha cursos cadastrados");
 		}
 	}
-	
+
 	public void criarCurso(Usuario usuario, Scanner entrada) {
 		if (usuario != null && usuario.getAutenticado() == true && usuario.getAdmin() != true) {
 			System.out.print("Informe nome do curso:");
@@ -135,7 +139,7 @@ public class TelaCursos {
 			System.out.println("Para criar um curso o usuário precisa tá autenticado!");
 		}
 	}
-	
+
 	public void editarCurso(Usuario usuario, Scanner entrada, ArrayList<Curso> cursos) {
 		String escolhaCursoEditar;
 		if(usuario == null || usuario.getAutenticado() != true) {
@@ -182,7 +186,7 @@ public class TelaCursos {
 						cursoAoVivoEditar.setMinutoEnc(entrada.nextInt());
 						System.out.println("Informe numero de vagas:");
 						cursoAoVivoEditar.setVagas(entrada.nextInt());
-						
+
 					}
 					if (cursoEditar instanceof CursoAoVivo) {
 						CursoAoVivo cursoIndividualEditar = (CursoAoVivo) cursoEditar;
@@ -206,7 +210,7 @@ public class TelaCursos {
 						cursoIndividualEditar.setHoraEnc(entrada.nextInt());
 						System.out.println("Informe minuto que encerra o curso:");
 						cursoIndividualEditar.setMinutoEnc(entrada.nextInt());
-						
+
 					}
 
 					System.out.println("Alteração feita com sucesso!");
@@ -218,7 +222,7 @@ public class TelaCursos {
 			}
 		}
 	}
-	
+
 	public void excluirCurso(Usuario usuario, Scanner entrada, ArrayList<Curso> cursos) {
 		String escolhaCursoDeletar;
 		if(usuario == null || usuario.getAutenticado() != true) {
