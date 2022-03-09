@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class BancoDeDados {
 	static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	static ArrayList<Curso> cursos = new ArrayList<Curso>();
+	static ArrayList<Compra> compras = new ArrayList<Compra>();
 	
 	// função que armazena o usuário
 	public static void armazenarUsuario(Usuario usuario) {
@@ -25,6 +26,15 @@ public class BancoDeDados {
 	// função que retorna os cursos armazenados
 	public static ArrayList<Curso> lerArmazenamentoCursos() {
 		return cursos;
+	}
+	
+	public static void armazenarCompra(Compra compra)  {
+		compras.add(compra);
+	}
+	
+	// função que retorna os cursos armazenados
+	public static ArrayList<Compra> lerArmazenamentoCompras() {
+		return compras;
 	}
 	
 }

@@ -1,8 +1,6 @@
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import java.text.*;
-import java.util.Date;
 
 // Classe LoadingBancoDeDados - responsável pelo carregamento inicial da plataforma criando alguns usuários e produtos
 
@@ -31,54 +29,51 @@ public class LoadingBancoDeDados {
 	private int[] vagas = {50,60,45,35,40,32,25};
 
 
-	
-GregorianCalendar comecoCurso8 = new GregorianCalendar();
-GregorianCalendar comecoCurso9 = new GregorianCalendar();
-GregorianCalendar comecoCurso10 = new GregorianCalendar();
-GregorianCalendar comecoCurso11 = new GregorianCalendar();
-GregorianCalendar comecoCurso12 = new GregorianCalendar();
-GregorianCalendar comecoCurso13 = new GregorianCalendar();
-GregorianCalendar comecoCurso14= new GregorianCalendar();
-GregorianCalendar comecoCurso15 = new GregorianCalendar();
-GregorianCalendar comecoCurso16 = new GregorianCalendar();
-GregorianCalendar comecoCurso17 = new GregorianCalendar();
-GregorianCalendar comecoCurso18 = new GregorianCalendar();
-GregorianCalendar comecoCurso19 = new GregorianCalendar();
-GregorianCalendar comecoCurso20 = new GregorianCalendar();
-GregorianCalendar comecoCurso21= new GregorianCalendar();
 
-GregorianCalendar[] datasIniciais = {comecoCurso8,comecoCurso9,comecoCurso10,comecoCurso11,comecoCurso12,comecoCurso13,comecoCurso14,comecoCurso15,comecoCurso16,comecoCurso17,comecoCurso18,comecoCurso19,comecoCurso20,comecoCurso21};
-GregorianCalendar FinalCurso8 = new  GregorianCalendar();
-GregorianCalendar FinalCurso9 = new  GregorianCalendar();
-GregorianCalendar FinalCurso10 = new  GregorianCalendar();
-GregorianCalendar FinalCurso11 = new  GregorianCalendar();
-GregorianCalendar FinalCurso12 = new  GregorianCalendar();
-GregorianCalendar FinalCurso13 = new  GregorianCalendar();
-GregorianCalendar FinalCurso14 = new  GregorianCalendar();
-GregorianCalendar FinalCurso15 = new  GregorianCalendar();
-GregorianCalendar FinalCurso16 = new  GregorianCalendar();
-GregorianCalendar FinalCurso17 = new  GregorianCalendar();
-GregorianCalendar FinalCurso18 = new  GregorianCalendar();
-GregorianCalendar FinalCurso19 = new  GregorianCalendar();
-GregorianCalendar FinalCurso20 = new  GregorianCalendar();
-GregorianCalendar FinalCurso21 = new  GregorianCalendar();
-GregorianCalendar [] datasFinais = {FinalCurso8, FinalCurso9, FinalCurso10, FinalCurso11, FinalCurso12, FinalCurso13, FinalCurso14,FinalCurso15, FinalCurso16, FinalCurso17, FinalCurso18, FinalCurso19, FinalCurso20, FinalCurso21};
-SimpleDateFormat  formatadorDeData = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+	GregorianCalendar comecoCurso8 = new GregorianCalendar();
+	GregorianCalendar comecoCurso9 = new GregorianCalendar();
+	GregorianCalendar comecoCurso10 = new GregorianCalendar();
+	GregorianCalendar comecoCurso11 = new GregorianCalendar();
+	GregorianCalendar comecoCurso12 = new GregorianCalendar();
+	GregorianCalendar comecoCurso13 = new GregorianCalendar();
+	GregorianCalendar comecoCurso14= new GregorianCalendar();
+	GregorianCalendar comecoCurso15 = new GregorianCalendar();
+	GregorianCalendar comecoCurso16 = new GregorianCalendar();
+	GregorianCalendar comecoCurso17 = new GregorianCalendar();
+	GregorianCalendar comecoCurso18 = new GregorianCalendar();
+	GregorianCalendar comecoCurso19 = new GregorianCalendar();
+	GregorianCalendar comecoCurso20 = new GregorianCalendar();
+	GregorianCalendar comecoCurso21= new GregorianCalendar();
+
+	GregorianCalendar[] datasIniciais = {comecoCurso8,comecoCurso9,comecoCurso10,comecoCurso11,comecoCurso12,comecoCurso13,comecoCurso14,comecoCurso15,comecoCurso16,comecoCurso17,comecoCurso18,comecoCurso19,comecoCurso20,comecoCurso21};
+	GregorianCalendar FinalCurso8 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso9 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso10 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso11 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso12 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso13 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso14 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso15 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso16 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso17 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso18 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso19 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso20 = new  GregorianCalendar();
+	GregorianCalendar FinalCurso21 = new  GregorianCalendar();
+	GregorianCalendar [] datasFinais = {FinalCurso8, FinalCurso9, FinalCurso10, FinalCurso11, FinalCurso12, FinalCurso13, FinalCurso14,FinalCurso15, FinalCurso16, FinalCurso17, FinalCurso18, FinalCurso19, FinalCurso20, FinalCurso21};
+	SimpleDateFormat  formatadorDeData = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
 
 
 	// função que irá fazer o carregamento do banco e armazenar os dados e retornar true caso seja carregado;
 	public boolean carregar(){
-		
-			
-		
 		for(int j=0; j<14;j++) {
-					try {
-						datasIniciais[j].setTime(formatadorDeData.parse(String.format("%d-%d-%d %d:%d",diaIni[j],mesIni[j],anoIni[j],horaIni[j],minutoIni[j])));
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+			try {
+				datasIniciais[j].setTime(formatadorDeData.parse(String.format("%d-%d-%d %d:%d",diaIni[j],mesIni[j],anoIni[j],horaIni[j],minutoIni[j])));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		for(int j=0; j<14;j++) {
 			try {
@@ -87,12 +82,12 @@ SimpleDateFormat  formatadorDeData = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			}
-		
-		
-		
-		
-		
+		}
+
+
+
+
+
 		// armazena usuario no banco de dados
 		for(int i = 0; i < 3; i++) {
 			Usuario usuario = new Usuario(nomes[i], sobrenomes[i], emails[i], senhas[i], telefones[i], cpfs[i], ceps[i], false, false);
@@ -145,7 +140,7 @@ SimpleDateFormat  formatadorDeData = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			BancoDeDados.armazenarCurso(curso);
 
 		}
-        
+
 		// armazena um usuário administrador
 		Usuario administrador = new Usuario("Root", "Admin", "admin@email.com", "root123", "99999999", "12345678900",
 				"44444444", true, false);

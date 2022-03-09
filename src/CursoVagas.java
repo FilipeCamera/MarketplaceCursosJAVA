@@ -21,7 +21,7 @@ public class CursoVagas extends CursoAoVivo{
 
 	// função que seta a quantidade de vagas do curso e pode retornar um erro caso o valor seja menor ou igual a 0
 	public void setVagas(int vagas) throws MensagemError {
-		if (vagas > 0) {
+		if (vagas >= 0) {
 			this.vagas = vagas;
 
 		} else {
@@ -29,6 +29,13 @@ public class CursoVagas extends CursoAoVivo{
 		}
 	}
 	
+	public void diminuirVagas(int vagas) throws MensagemError {
+		if(vagas >= 0) {
+			this.vagas = vagas;
+		} else {
+			throw new MensagemError("O curso já atingiu o limite de usuários");
+		}
+	}
 	
 	
 

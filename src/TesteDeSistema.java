@@ -31,7 +31,7 @@ public class TesteDeSistema {
 
 		// Teste de listar, editar e excluir cursos
 
-		new TelaCursos().listarCursos(input);
+		new TelaCursos().listarCursos(input, usuario, cursos);
 
 		new TelaCursos().editarCurso(usuario, input, cursos);
 

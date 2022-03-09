@@ -33,7 +33,7 @@ public class Menu {
 			System.out.print("\t 4 - Editar curso \n");
 			System.out.print("\t 5 - Excluir curso \n");
 			System.out.print("\t 6 - Ver usuários \n");
-			System.out.print("\t 7 - Comprar curso \n");
+			System.out.print("\t 7 - Minhas compras \n");
 			System.out.print("\t 8 - Desconectar \n");
 			System.out.print("\t 9 - Sair \n");
 			System.out.print("\n\nEscolha sua opção: ");
@@ -56,7 +56,7 @@ public class Menu {
 			case 2:
 				
 				// apresenta a tela com os cursos disponíveis na plataforma
-				new TelaCursos().listarCursos(entrada);
+				new TelaCursos().listarCursos(entrada, usuario, cursos);
 				break;
 
 			case 3:
@@ -84,7 +84,6 @@ public class Menu {
 				}
 				break;
 			case 7:
-				System.out.println("Por enquanto essa funcionalidade não está disponível");
 				
 				break;
 			case 8:
@@ -94,7 +93,10 @@ public class Menu {
 				break;
 			case 9:
 				
-				// para a aplicação
+				ativo = false;
+				break;
+				
+			default:
 				ativo = false;
 				break;
 			}
