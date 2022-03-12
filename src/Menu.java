@@ -32,7 +32,7 @@ public class Menu {
 			System.out.print("\t 3 - Criar curso \n");
 			System.out.print("\t 4 - Editar curso \n");
 			System.out.print("\t 5 - Excluir curso \n");
-			System.out.print("\t 6 - Ver usuários \n");
+			System.out.print("\t 6 - Ver usuarios e compras\n");
 			System.out.print("\t 7 - Minhas compras \n");
 			System.out.print("\t 8 - Desconectar \n");
 			System.out.print("\t 9 - Sair \n");
@@ -84,7 +84,7 @@ public class Menu {
 				}
 				break;
 			case 7:
-				
+				  new TelaCompras().minhasCompras(usuario);
 				break;
 			case 8:
 				
