@@ -51,6 +51,25 @@ public class TelaUsuarios {
 			}else {
 				throw new MensagemError("Nenhum usuário cadastrado");
 			}
+			System.out.println("Deseja listar vendas?1-Sim 2-Nao");
+			int listarVendas = entrada.nextInt();
+			if(listarVendas==1 && BancoDeDados.lerArmazenamentoCompras().size()!=0) {
+				for(int j=0;j<BancoDeDados.lerArmazenamentoCompras().size();j++) {
+					System.out.printf("%d-%s",j+1,BancoDeDados.lerArmazenamentoCompras().get(j));
+				}
+				System.out.println("Deseja ver receita total das taxas sobre vendas? 1-SIM 2- NAO");
+				int verReceita = entrada.nextInt();
+				entrada.nextLine();
+				if(verReceita==1){
+					double receita=0;
+					for(int i=0;i<BancoDeDados.lerArmazenamentoCompras().size();i++) {
+							receita+=BancoDeDados.lerArmazenamentoCompras().get(i).getCurso().getPreco()*0.05;
+						}
+					System.out.printf("A receita total das taxas sobre vendas � de: R$ %.2f \n",receita);
+				}
+			}else {
+			System.out.println("Ainda nao houve compras");
+			}
 		}
 		else {
 			throw new MensagemError("Função permitida somente para administradores");

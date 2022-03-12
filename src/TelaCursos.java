@@ -16,6 +16,7 @@ public class TelaCursos {
 	public void listarCursos(Scanner entrada, Usuario comprador, ArrayList<Curso> cursos) {
 		if(cursos.size()!=0) {
 			int quantidadeListados=10;
+			int indiceInicial=0;
 			int expandirLista, opcaoCurso, escolha;
 			String codigoCurso=null;
 			boolean mostrarCursos= true;
@@ -26,18 +27,18 @@ public class TelaCursos {
 				System.out.print("=====\t Cursos disponiveis \t=====\n");
 
 				if (cursos.size()>=quantidadeListados) {
-					for(int i=0;i<quantidadeListados;i++) {
-						System.out.println(BancoDeDados.lerArmazenamentoCursos().get(i));
+					for(int i=indiceInicial;i<quantidadeListados;i++) {
+						System.out.printf("%d-%s",i+1,cursos.get(i).toString());
 					}
 
 				}else{
-					for(int i=0;i<cursos.size();i++) {
-						System.out.println(cursos.get(i).toString());
+					for(int i=indiceInicial;i<cursos.size();i++) {
+						System.out.printf("%d-%s",i+1,cursos.get(i).toString());
 						quantidadeListados=cursos.size();//informacao usada no proximo for
 					}
 				}
 				System.out.println("=====\t Escolha uma opÃ§Ã£o \t=====");
-				System.out.print("1- Detalhar curso, 2- Comprar curso, 3- Exibir mais cursos, 4- Sair \n");
+				System.out.print("1- Detalhar curso, 2- Comprar curso, 3- Exibir mais 10 cursos, 4- Sair \n");
 
 				opcaoCurso=entrada.nextInt();
 				entrada.nextLine();//limpando o buffer do teclado
@@ -127,6 +128,7 @@ public class TelaCursos {
 
 				} else if(opcaoCurso == 3) {
 					quantidadeListados+=10;
+					indiceInicial+=10;
 				} else {
 					mostrarCursos = false;
 				}
@@ -173,65 +175,91 @@ public class TelaCursos {
 				GregorianCalendar dataInicial = new GregorianCalendar();
 				GregorianCalendar dataFinal = new GregorianCalendar();
 
-
-
+				formatadorDeData.setLenient(false);
+				
+				
 				try{
-					dataInicial.setTime(formatadorDeData.parse(String.format("%d-%d-%d %d:%d",diaIni,mesIni,anoIni, horaIni, minutoIni)));
-
-					/*ValidacaoData vd = new ValidacaoData();
-				try{
-				vd.validaData(diaIni,mesIni,anoIni,horaIni,minutoIni,diaEnc,mesEnc,anoEnc,horaEnc,minutoEnc);
-					 */
+				dataInicial.setTime(formatadorDeData.parse(String.format("%d-%d-%d %d:%d",diaIni,mesIni,anoIni, horaIni, minutoIni)));
+		
 					try {
 						dataFinal.setTime(formatadorDeData.parse(String.format("%d-%d-%d %d:%d",diaEnc,mesEnc,anoEnc, horaEnc, minutoEnc)));	
-
+					   
 						if(dataInicial.before(dataFinal)) {
-
-
-
-							for(Curso cursoDoCriador: BancoDeDados.lerArmazenamentoCursos()) {
-								if(cursoDoCriador.getCriador()==usuario && cursoDoCriador instanceof CursoAoVivo) {
-
-									CursoAoVivo cursoDoCriador2 = (CursoAoVivo) cursoDoCriador; 
-
-									if(cursoDoCriador2.getDataEncerramento().before(dataInicial)||cursoDoCriador2.getDataComeco().after(dataFinal)) {
-
-										if (tipoCurso == 2) {
-											System.out.println("Informe numero de vagas:");
-											int vagas = entrada.nextInt();
-											Curso curso = new CursoVagas(nomeCurso,preco,usuario, dataInicial,dataFinal, vagas);
-											BancoDeDados.armazenarCurso(curso);
+						     
+							boolean cursoForaDoIntervalo=true;
+							
+							while(cursoForaDoIntervalo) {	
+								for(int i=0; i<BancoDeDados.lerArmazenamentoCursos().size();i++) {
+									
+										if(BancoDeDados.lerArmazenamentoCursos().get(i).getCriador()==usuario && BancoDeDados.lerArmazenamentoCursos().get(i) instanceof CursoAoVivo) {
+											
+											CursoAoVivo cursoDoCriador2 = (CursoAoVivo) BancoDeDados.lerArmazenamentoCursos().get(i); 
+											
+											if((cursoDoCriador2.getDataEncerramento().before(dataInicial) && cursoDoCriador2.getDataComeco().before(dataFinal))||(cursoDoCriador2.getDataEncerramento().after(dataInicial) && cursoDoCriador2.getDataComeco().after(dataFinal))) {
+												cursoForaDoIntervalo=true;
+											}
+											else {
+												cursoForaDoIntervalo=false;
+											}
+																
+										}else {
+											
+											cursoForaDoIntervalo=true;//Caso o usuario ainda não tenha nenhum curso ao vivo cadastrado
+										}	
+								}
+								if(cursoForaDoIntervalo) {
+									if (tipoCurso == 2) {
+									
+										System.out.println("Informe numero de vagas:");
+										int vagas = entrada.nextInt();
+										Curso curso = new CursoVagas(nomeCurso,preco,usuario, dataInicial,dataFinal, vagas);
+										BancoDeDados.armazenarCurso(curso);
+										
+									}else if (tipoCurso == 3) {
+										if(horaEnc>=horaIni) {
+											if(minutoEnc>=minutoIni|| horaEnc>horaIni){
+												Curso curso = new CursoAoVivo(nomeCurso, preco, usuario, dataInicial,dataFinal);
+												BancoDeDados.armazenarCurso(curso);
+											}else {
+												System.out.println("Curso nao criado: horario de enceramento da aula nao deve ser anterior ao horario inicial");
+												
+											}
+											
+										}else {
+											System.out.println("Curso nao criado: horario de enceramento da aula nao deve ser anterior ao horario inicial");
 										}
-
-										if (tipoCurso == 3) {
-											Curso curso = new CursoAoVivo(nomeCurso, preco, usuario, dataInicial,dataFinal);
-											BancoDeDados.armazenarCurso(curso);
-										}
-										if(tipoCurso==4) {
-											Curso curso = new CursoAoVivo(nomeCurso, preco, usuario, dataInicial,dataFinal);
-											BancoDeDados.armazenarCurso(curso);	
-										}
-									}	
-								}	
+										
+									}else if(tipoCurso==4) {
+										Curso curso = new CursoAoVivo(nomeCurso, preco, usuario, dataInicial,dataFinal);
+										BancoDeDados.armazenarCurso(curso);	
+									}else {
+										System.out.println("Opcao invalida");
+									}
+									
+									cursoForaDoIntervalo=false;//para encerrar o while	
+								}else {
+									System.out.println("Curso nao cadastrado, data conflitante");
+								}
 							}
-
+								
 						}else {
-							System.out.println("Curso nao cadastrado, data final invalida");
-
-						}
+							   System.out.println("Curso nao cadastrado, data final invalida");
+							   
+						   }
 					}catch(ParseException e) {
-						e.printStackTrace();
-					}
+							
+							System.out.println("Curso não cadastrado, data Final inválida");
+						}
 				}catch(ParseException e) {
-					e.printStackTrace();
-					System.out.println("Curso nï¿½o cadastrado, data inicial invï¿½lida");
+					
+					System.out.println("Curso não cadastrado, data inicial inválida");
 				}
-			} else {
+			
+			}else {
 				Curso curso = new Curso(nomeCurso, preco, usuario);
 				BancoDeDados.armazenarCurso(curso);
 			}
-
-		} else {
+		}else {
 			System.out.println("Para criar um curso o usuÃ¡rio precisa tÃ¡ autenticado!");
 		}
 	}
@@ -250,84 +278,97 @@ public class TelaCursos {
 			}
 			System.out.print("Escolha o curso que quer editar (cÃ³digo): ");
 			escolhaCursoEditar = entrada.nextLine();
-
-			for(Curso cursoEditar : cursos) {
-
-				cursoEditar= (CursoAoVivo) cursoEditar;/*CONVERSï¿½O NECESSARIA PARA ALTERACAO DE DATAS, POIS cursoEditar ï¿½ da classe Curso que nï¿½o possui datas
-				 */
+			
+			boolean cursoEditarEncontrado=false;//variavel que informará se o curso foi encontrado
+			for(int i=0; i<BancoDeDados.lerArmazenamentoCursos().size();i++) {
+				Curso cursoEditar = BancoDeDados.lerArmazenamentoCursos().get(i);
+				
 				if(cursoEditar.getCodigo().equals(escolhaCursoEditar) && cursoEditar.getCriador().equals(usuario)) {
+					cursoEditarEncontrado = true;
+					
 					System.out.print("Informe nome do curso:");
 					cursoEditar.setNomeCurso(entrada.nextLine());
 
 					System.out.print("Informe valor do curso:");
 					cursoEditar.setPreco(entrada.nextDouble());
-
-					if (cursoEditar instanceof CursoVagas) {
-						CursoVagas cursoAoVivoEditar = (CursoVagas) cursoEditar;
-
-						GregorianCalendar dataComeco = new GregorianCalendar();
-						System.out.println("Informe data(no formato dd/MM/yyyy HH:mm) que inicia o curso:");
-						String comeco=entrada.nextLine();
-						try {
-							dataComeco.setTime(formatadorDeData.parse(comeco));
-						} catch (ParseException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						cursoAoVivoEditar.setDataComeco(dataComeco);
-
-						GregorianCalendar dataEncerramento = new GregorianCalendar();
-						System.out.println("Informe data(no formato dd/MM/yyyy HH:mm) que encerra o curso:");
-						String encerramento=entrada.nextLine();
-						try {
-							dataEncerramento.setTime(formatadorDeData.parse(encerramento));
-						} catch (ParseException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						cursoAoVivoEditar.setDataEncerramento(dataEncerramento);
-
-						System.out.println("Informe numero de vagas:");
-						try {
-							cursoAoVivoEditar.setVagas(entrada.nextInt());
-						} catch (MensagemError e) {
-							// TODO Auto-generated catch block
-							System.out.println(e.getMessage());
-						}
-
-					}
-					if (cursoEditar instanceof CursoAoVivo) {
+					entrada.nextLine();
+					
+					 if (cursoEditar instanceof CursoAoVivo) {
 						CursoAoVivo cursoIndividualEditar = (CursoAoVivo) cursoEditar;
 						GregorianCalendar dataComeco = new GregorianCalendar();
-						System.out.println("Informe data(no formato dd/MM/yyyy HH:mm) que inicia o curso:");
+						System.out.println("Informe data(no formato dd-MM-yyyy HH:mm) que inicia o curso:");
 						String comeco=entrada.nextLine();
-						try {
-							dataComeco.setTime(formatadorDeData.parse(comeco));
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						
+						if(comeco!=null) {
+							
+							try {
+								dataComeco.setTime(formatadorDeData.parse(comeco));
+								
+							} catch (ParseException e) {
+								System.out.println("Data inicial invalida");
+							}
 						}
-						cursoIndividualEditar.setDataComeco(dataComeco);
-
+						
+						
 						GregorianCalendar dataEncerramento = new GregorianCalendar();
 						System.out.println("Informe data(no formato dd/MM/yyyy HH:mm) que encerra o curso:");
 						String encerramento=entrada.nextLine();
-						try {
-							dataEncerramento.setTime(formatadorDeData.parse(encerramento));
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						boolean cursoForaDoIntervalo2=false;//variavel que informa se o curso esta em uma data viável
+						if(encerramento!=null) {
+							
+							try {
+								dataEncerramento.setTime(formatadorDeData.parse(encerramento));
+								if(dataEncerramento.after(dataComeco)) {
+									for(int j=0; j<BancoDeDados.lerArmazenamentoCursos().size();j++) {
+										if(BancoDeDados.lerArmazenamentoCursos().get(i).getCriador()==usuario && BancoDeDados.lerArmazenamentoCursos().get(i) instanceof CursoAoVivo) {
+											CursoAoVivo cursoEditarData;
+											cursoEditarData = (CursoAoVivo) BancoDeDados.lerArmazenamentoCursos().get(i);
+											
+											if((cursoEditarData.getDataEncerramento().before(dataComeco) && cursoEditarData.getDataComeco().before(dataEncerramento))||(cursoEditarData.getDataEncerramento().after(dataComeco) && cursoEditarData.getDataComeco().after(dataComeco))) {
+												cursoForaDoIntervalo2=true;
+											}
+											else {
+												cursoForaDoIntervalo2=false;
+											}
+										}	
+									}
+										if(cursoForaDoIntervalo2) {
+											cursoIndividualEditar.setDataComeco(dataComeco);
+											cursoIndividualEditar.setDataEncerramento(dataEncerramento);
+										}	
+						
+										
+									
+								
+								}else{
+									System.out.println("Data de encerramento nao pode ser anterior a data de inicio");
+								}
+							
+							} catch (ParseException e) {
+								System.out.println("Data de Encerramento invalida");
+							}
 						}
-						cursoIndividualEditar.setDataEncerramento(dataEncerramento);
-
+						
+						if (cursoEditar instanceof CursoVagas && cursoForaDoIntervalo2) {
+							CursoVagas cursoAoVivoEditar = (CursoVagas) cursoEditar;
+							
+							System.out.println("Informe numero de vagas:");
+							try {
+								cursoAoVivoEditar.setVagas(entrada.nextInt());
+							} catch (MensagemError e) {
+								// TODO Auto-generated catch block
+								System.out.println(e.getMessage());
+							}
+							
+						}	
 					}
 
 					System.out.println("AlteraÃ§Ã£o feita com sucesso!");
 					break;
-				} else {
-					System.out.println("Tivemos um problema, por favor tente novamente mais tarde.");
-					break;
-				}
+				} 
+			}
+		if(cursoEditarEncontrado==false) {
+				System.out.println("Tivemos um problema, por favor tente novamente mais tarde.");
 			}
 		}
 	}
