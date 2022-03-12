@@ -1,11 +1,11 @@
-import java.util.UUID;
+import java.util.Random;
 
 // Classe Curso - responsável pela criação de curso ou (gravado)
 
 public class Curso {
 
 	private String nomeCurso;
-	private String codigo = UUID.randomUUID().toString(); // cria o código do curso
+	private String codigo; // cria o código do curso
 	private double preco;
 	private Usuario criador;
 	
@@ -13,6 +13,7 @@ public class Curso {
 		this.nomeCurso = nomeCurso;
 		this.preco = preco;
 		this.criador = criador;
+		this.codigo = Long.toString(new Random().nextLong(0, 999999999));
 	}
 
 	// função que retorna o preço do curso
@@ -56,7 +57,7 @@ public class Curso {
 	
 	// função que retorna algumas informações do curso
 	public String toString() {
-		return String.format("código: %s - titulo: %s - valor: R$ %s \t \n", this.codigo, this.nomeCurso, this.preco);
+		return String.format("codigo: %s - titulo: %s - valor: R$ %s \t \n", this.codigo, this.nomeCurso, this.preco);
 	}
 
 }

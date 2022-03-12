@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 
 // Classe Menu - responsável pela interação com o usuário contendo 10 funcionalidades indo de 0 a 9
 
@@ -36,7 +35,7 @@ public class Menu {
 			System.out.print("\t 7 - Minhas compras \n");
 			System.out.print("\t 8 - Desconectar \n");
 			System.out.print("\t 9 - Sair \n");
-			System.out.print("\n\nEscolha sua opção: ");
+			System.out.print("\n\nEscolha sua opcao: ");
 			options = entrada.nextInt();
 			entrada.nextLine();
 
@@ -97,7 +96,7 @@ public class Menu {
 				break;
 				
 			default:
-				ativo = false;
+				System.out.println("Comando nao aceito, por favor passe um comando correto!");
 				break;
 			}
 

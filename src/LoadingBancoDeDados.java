@@ -84,10 +84,6 @@ public class LoadingBancoDeDados {
 			}
 		}
 
-
-
-
-
 		// armazena usuario no banco de dados
 		for(int i = 0; i < 3; i++) {
 			Usuario usuario = new Usuario(nomes[i], sobrenomes[i], emails[i], senhas[i], telefones[i], cpfs[i], ceps[i], false, false);
@@ -150,9 +146,6 @@ public class LoadingBancoDeDados {
 
 		return carregado;
 	}
-
-
-
 
 
 }

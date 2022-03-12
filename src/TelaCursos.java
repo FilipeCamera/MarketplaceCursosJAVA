@@ -1,17 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.text.*;
 import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Random;
+
 /* Classe responsável por mostrar a listagem de cursos, criação, edição e remoção de curso */
 
 public class TelaCursos {
 
 	SimpleDateFormat formatadorDeData = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-	Random r = new Random();
+	
 	// função de listar cursos
 	public void listarCursos(Scanner entrada, Usuario comprador, ArrayList<Curso> cursos) {
 		if(cursos.size()!=0) {
@@ -38,7 +35,7 @@ public class TelaCursos {
 					}
 				}
 				System.out.println("=====\t Escolha uma opção \t=====");
-				System.out.print("1- Detalhar curso, 2- Comprar curso, 3- Exibir mais 10 cursos, 4- Sair \n");
+				System.out.print("1- Detalhar curso, 2- Comprar curso, 3- Exibir mais 10 cursos, 4- Voltar \n");
 
 				opcaoCurso=entrada.nextInt();
 				entrada.nextLine();//limpando o buffer do teclado
@@ -72,7 +69,7 @@ public class TelaCursos {
 
 					}
 					
-					System.out.println("Deseja continuar? 1- Sim 2- Não");
+					System.out.println("Deseja continuar? 1- Sim 2- Nao");
 					escolha=entrada.nextInt();
 					entrada.nextLine();
 
@@ -83,12 +80,12 @@ public class TelaCursos {
 				else if (opcaoCurso == 2) {
 
 					if(comprador == null) {
-						System.out.println("Usuário precisa está autenticado para fazer uma compra");
+						System.out.println("Usuario precisa esta autenticado para fazer uma compra");
 					} else {
 						System.out.println("Infome codigo do curso:");
 						codigoCurso=entrada.nextLine();
 						boolean encerrou = false;
-
+						boolean naoecontrado = false;
 						for(Curso compraCurso : cursos) {
 							if(compraCurso.getCodigo().equals(codigoCurso)) {
 								if(compraCurso instanceof CursoVagas) {
@@ -105,16 +102,25 @@ public class TelaCursos {
 								}
 								if(encerrou == true) {
 									System.out.println("Não foi possível efetuar a compra");
+									break;
 								} else {
 									
-									Compra cursoCompra = new Compra(compraCurso, comprador, r.nextInt(200));
+									Compra cursoCompra = new Compra(compraCurso, comprador);
 
 									BancoDeDados.armazenarCompra(cursoCompra);
 
 									System.out.println("Curso comprado com sucesso");
+									System.out.printf("O codigo da sua compra: %s \n", cursoCompra.getCodigo());
+									break;
 								}
+							} else {
+								naoecontrado = true;
 							}
 
+						}
+						
+						if(naoecontrado == true) {
+							System.out.println("O curso não encontrado");
 						}
 						
 					}
@@ -204,7 +210,7 @@ public class TelaCursos {
 																
 										}else {
 											
-											cursoForaDoIntervalo=true;//Caso o usuario ainda n�o tenha nenhum curso ao vivo cadastrado
+											cursoForaDoIntervalo=true;//Caso o usuario ainda n�o tenha nenhum curso ao vivo cadastrado
 										}	
 								}
 								if(cursoForaDoIntervalo) {
@@ -248,11 +254,11 @@ public class TelaCursos {
 						   }
 					}catch(ParseException e) {
 							
-							System.out.println("Curso n�o cadastrado, data Final inv�lida");
+							System.out.println("Curso n�o cadastrado, data Final inv�lida");
 						}
 				}catch(ParseException e) {
 					
-					System.out.println("Curso n�o cadastrado, data inicial inv�lida");
+					System.out.println("Curso n�o cadastrado, data inicial inv�lida");
 				}
 			
 			}else {
@@ -279,7 +285,7 @@ public class TelaCursos {
 			System.out.print("Escolha o curso que quer editar (código): ");
 			escolhaCursoEditar = entrada.nextLine();
 			
-			boolean cursoEditarEncontrado=false;//variavel que informar� se o curso foi encontrado
+			boolean cursoEditarEncontrado=false;//variavel que informar� se o curso foi encontrado
 			for(int i=0; i<BancoDeDados.lerArmazenamentoCursos().size();i++) {
 				Curso cursoEditar = BancoDeDados.lerArmazenamentoCursos().get(i);
 				
@@ -313,7 +319,7 @@ public class TelaCursos {
 						GregorianCalendar dataEncerramento = new GregorianCalendar();
 						System.out.println("Informe data(no formato dd/MM/yyyy HH:mm) que encerra o curso:");
 						String encerramento=entrada.nextLine();
-						boolean cursoForaDoIntervalo2=false;//variavel que informa se o curso esta em uma data vi�vel
+						boolean cursoForaDoIntervalo2=false;//variavel que informa se o curso esta em uma data vi�vel
 						if(encerramento!=null) {
 							
 							try {

@@ -52,14 +52,14 @@ public class Validacao {
 		}
 		
 		// verifica se existe algum usuário cadastrado na plataforma
-		if(this.usuarios.size() == 0) {
+		else if(this.usuarios.size() == 0) {
 			throw new MensagemError("Nenhum usuário cadastrado!");
 		}
 		
 		// verifica se os dados passado pelo usuário corresponde com que tem cadastrado na plataforma,
 		// no caso, verifica se a senha está correta
 		for(int i = 0; i < this.usuarios.size(); i++) {
-			if (email == this.usuarios.get(i).getEmail() && senha != this.usuarios.get(i).getSenha()) {
+			if (this.usuarios.get(i).getEmail().equals(email) && !this.usuarios.get(i).getSenha().equals(senha)) {
 				throw new MensagemError("E-mail ou senha incorretas!");
 			}
 		}
