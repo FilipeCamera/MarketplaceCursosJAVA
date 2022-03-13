@@ -1,3 +1,5 @@
+// classe responsável por mostrar ao usuário as compras feitas por ele na plataforma
+
 import java.util.ArrayList;
 
 public class TelaCompras {

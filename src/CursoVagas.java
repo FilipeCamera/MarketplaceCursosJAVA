@@ -6,8 +6,6 @@ public class CursoVagas extends CursoAoVivo{
 
 	private int vagas;
 
-	
-
 	public CursoVagas(String nomeCurso, double preco, Usuario criador, GregorianCalendar dataComeco,
 			GregorianCalendar dataEncerramento, int vagas) {
 		super(nomeCurso, preco, criador, dataComeco, dataEncerramento);
@@ -29,6 +27,7 @@ public class CursoVagas extends CursoAoVivo{
 		}
 	}
 	
+	// função que irá diminuir a quantidade de vagas de acordo com a compra do usuário
 	public void diminuirVagas(int vagas) throws MensagemError {
 		if(vagas >= 0) {
 			this.vagas = vagas;

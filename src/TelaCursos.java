@@ -3,13 +3,15 @@ import java.util.Scanner;
 import java.text.*;
 import java.util.GregorianCalendar;
 
-/* Classe responsável por mostrar a listagem de cursos, criação, edição e remoção de curso */
+/* Classe responsável por mostrar a listagem de cursos, criação, edição e remoção de curso
+ * além disso, também é responsável por detalhar e fazer a compra de algum curso
+ *  */
 
 public class TelaCursos {
 
 	SimpleDateFormat formatadorDeData = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 	
-	// função de listar cursos
+	// função de listar cursos - detalhar e comprar
 	public void listarCursos(Scanner entrada, Usuario comprador, ArrayList<Curso> cursos) {
 		if(cursos.size()!=0) {
 			int quantidadeListados=10;
@@ -40,6 +42,7 @@ public class TelaCursos {
 				opcaoCurso=entrada.nextInt();
 				entrada.nextLine();//limpando o buffer do teclado
 
+				// detalha o curso
 				if(opcaoCurso == 1) {
 					System.out.println("Infome codigo do curso:");
 					codigoCurso=entrada.nextLine();
@@ -77,6 +80,7 @@ public class TelaCursos {
 						mostrarCursos = false;
 					}
 				}
+				// efetuar a compra de algum curso
 				else if (opcaoCurso == 2) {
 
 					if(comprador == null) {
@@ -86,11 +90,14 @@ public class TelaCursos {
 						codigoCurso=entrada.nextLine();
 						boolean encerrou = false;
 						boolean naoecontrado = false;
+						
+						// procura pelo curso
 						for(Curso compraCurso : cursos) {
 							if(compraCurso.getCodigo().equals(codigoCurso)) {
 								if(compraCurso instanceof CursoVagas) {
 									CursoVagas cursoVaga = (CursoVagas) compraCurso;
-
+									
+									// diminui a quantidade de vagas e caso já tenha esgotado retorna uma excessão
 									try {
 										cursoVaga.diminuirVagas(cursoVaga.getVagas() - 1);
 
@@ -100,11 +107,12 @@ public class TelaCursos {
 									}
 
 								}
+								// verfica se o curso terminou a quantidade de vagas
 								if(encerrou == true) {
 									System.out.println("Não foi possível efetuar a compra");
 									break;
 								} else {
-									
+									// faz a compra, armazena e retorna o código da compra
 									Compra cursoCompra = new Compra(compraCurso, comprador);
 
 									BancoDeDados.armazenarCompra(cursoCompra);
@@ -285,10 +293,11 @@ public class TelaCursos {
 			System.out.print("Escolha o curso que quer editar (código): ");
 			escolhaCursoEditar = entrada.nextLine();
 			
-			boolean cursoEditarEncontrado=false;//variavel que informar� se o curso foi encontrado
+			boolean cursoEditarEncontrado=false;//variavel que informar se o curso foi encontrado
 			for(int i=0; i<BancoDeDados.lerArmazenamentoCursos().size();i++) {
 				Curso cursoEditar = BancoDeDados.lerArmazenamentoCursos().get(i);
 				
+				// verifica se o criador do curso corresponde com o usuario autenticado
 				if(cursoEditar.getCodigo().equals(escolhaCursoEditar) && cursoEditar.getCriador().equals(usuario)) {
 					cursoEditarEncontrado = true;
 					
@@ -299,6 +308,7 @@ public class TelaCursos {
 					cursoEditar.setPreco(entrada.nextDouble());
 					entrada.nextLine();
 					
+					// edita o curso do tipo ao vivo
 					 if (cursoEditar instanceof CursoAoVivo) {
 						CursoAoVivo cursoIndividualEditar = (CursoAoVivo) cursoEditar;
 						GregorianCalendar dataComeco = new GregorianCalendar();
@@ -319,7 +329,7 @@ public class TelaCursos {
 						GregorianCalendar dataEncerramento = new GregorianCalendar();
 						System.out.println("Informe data(no formato dd/MM/yyyy HH:mm) que encerra o curso:");
 						String encerramento=entrada.nextLine();
-						boolean cursoForaDoIntervalo2=false;//variavel que informa se o curso esta em uma data vi�vel
+						boolean cursoForaDoIntervalo2=false;//variavel que informa se o curso esta em uma data viavel
 						if(encerramento!=null) {
 							
 							try {
@@ -355,6 +365,7 @@ public class TelaCursos {
 							}
 						}
 						
+						// edita o curso do tipo vagas
 						if (cursoEditar instanceof CursoVagas && cursoForaDoIntervalo2) {
 							CursoVagas cursoAoVivoEditar = (CursoVagas) cursoEditar;
 							
@@ -394,6 +405,7 @@ public class TelaCursos {
 			System.out.print("Escolha o curso que quer editar (código): ");
 			escolhaCursoDeletar = entrada.nextLine();
 
+			// procura pelo curso e deleta
 			for(Curso cursoDeletar : cursos) {
 				if(cursoDeletar.getCodigo().equals(escolhaCursoDeletar) && cursoDeletar.getCriador().equals(usuario)) {
 

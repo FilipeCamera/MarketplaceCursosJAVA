@@ -36,6 +36,10 @@ public class TesteDeSistema {
 		new TelaCursos().editarCurso(usuario, input, cursos);
 
 		new TelaCursos().excluirCurso(usuario, input, cursos);
+		
+		// Teste de mostrar minhas compras
+		
+		new TelaCompras().minhasCompras(usuario);
 
 	}
 
